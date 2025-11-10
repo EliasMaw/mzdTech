@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>mzdTech – IT Solutions</title>
+  <meta name="description" content="mzdTech: IT solutions, web design, cloud, and automation. Book a consult and explore products and services." />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root { 
+      --brand: #2563eb; 
+      --brand-dark: #1e40af;
+      --accent: #60a5fa;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, "Apple Color Emoji", "Segoe UI Emoji"; 
+      overflow-x: hidden;
+    }
+    html { scroll-behavior: smooth; }
+
+    /* Reusable UI */
+    .glass { backdrop-filter: saturate(180%) blur(12px); background: rgba(255,255,255,0.85); transition: all 0.3s ease; }
+    .dark .glass { background: rgba(17,24,39,0.85); }
+    .btn { display:inline-flex; align-items:center; padding:0.875rem 1.5rem; border-radius:0.75rem; font-weight:600; transition:all 0.3s ease; position:relative; overflow:hidden; }
+    .btn::before { content:''; position:absolute; top:50%; left:50%; width:0; height:0; border-radius:50%; background:rgba(255,255,255,0.3); transform:translate(-50%,-50%); transition:width 0.6s,height 0.6s; }
+    .btn:hover::before { width:300px; height:300px; }
+    .btn-primary { background:linear-gradient(135deg,var(--brand) 0%,var(--brand-dark) 100%); color:#fff; box-shadow:0 4px 15px rgba(37,99,235,0.4); }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(37,99,235,0.6); }
+    .btn-outline { border:2px solid var(--brand); color:var(--brand); background:transparent; }
+    .btn-outline:hover { background:var(--brand); color:#fff; transform:translateY(-2px); }
+
+    .card { border-radius:1.25rem; padding:1.75rem; background:#fff; box-shadow:0 4px 6px rgba(0,0,0,0.07); transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275); position:relative; overflow:hidden; }
+    .card::before { content:''; position:absolute; top:0; left:0; width:100%; height:4px; background:linear-gradient(90deg,var(--brand),var(--accent)); transform:scaleX(0); transition:transform 0.3s ease; }
+    .card:hover::before { transform:scaleX(1); }
+    .card:hover { transform:translateY(-8px); box-shadow:0 12px 24px rgba(0,0,0,0.15); }
+    .dark .card { background:#1f2937; color:#f3f4f6; }
+
+    .badge { display:inline-block; font-size:0.75rem; font-weight:600; padding:0.5rem 1rem; border-radius:9999px; background:linear-gradient(135deg,#dbeafe 0%,#bfdbfe 100%); color:#1e40af; transition:all 0.3s ease; animation:float 3s ease-in-out infinite; }
+    .badge:hover { transform:scale(1.1); box-shadow:0 4px 12px rgba(37,99,235,0.3); }
+    .dark .badge { background:linear-gradient(135deg,#1e3a8a 0%,#1e40af 100%); color:#bfdbfe; }
+
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(30px) } to { opacity:1; transform:translateY(0) } }
+    .animate-fade-in { animation:fadeInUp 0.8s ease-out forwards; opacity:0; }
+    .animate-delay-1 { animation-delay:0.1s }
+    .animate-delay-2 { animation-delay:0.2s }
+    .animate-delay-3 { animation-delay:0.3s }
+
+    @keyframes floatSlow { 0%,100%{ transform:translateY(0) rotate(0) } 50%{ transform:translateY(-20px) rotate(5deg) } }
+    .float-slow { animation:floatSlow 6s ease-in-out infinite; }
+
+    .gradient-text { background:linear-gradient(135deg,var(--brand) 0%,var(--accent) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
+    @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:0.8} }
+    .network-line { animation:pulse 3s ease-in-out infinite; }
+
+    .feature-img { width:100%; height:200px; object-fit:cover; border-radius:1rem; transition:transform 0.3s ease; }
+    .card:hover .feature-img { transform:scale(1.05); }
+
+    nav a { position:relative; transition:color 0.3s ease; }
+    nav a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:var(--brand); transition:width 0.3s ease; }
+    nav a:hover::after { width:100%; }
+
+    .particles { position:absolute; width:100%; height:100%; overflow:hidden; }
+    .particle { position:absolute; width:4px; height:4px; background:var(--accent); border-radius:50%; opacity:0.4; animation:particleFloat 15s infinite ease-in-out; }
+    @keyframes particleFloat { 0%,100%{transform:translate(0,0)} 25%{transform:translate(100px,-100px)} 50%{transform:translate(-50px,-200px)} 75%{transform:translate(150px,-150px)} }
+
+    .img-loading { background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%); background-size:200% 100%; animation:loading 1.5s ease-in-out infinite; }
+    @keyframes loading { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+    /* Lightbox */
+    .lightbox { position:fixed; inset:0; background:rgba(0,0,0,0.75); display:none; align-items:center; justify-content:center; z-index:60; }
+    .lightbox img { max-width:90vw; max-height:80vh; border-radius:1rem; }
+
+    /* Floating WhatsApp */
+    .wa-fab { position:fixed; right:1rem; bottom:1.25rem; z-index:50; }
+
+    /* Chat widget */
+    .chat-fab { position:fixed; right:1rem; bottom:5.5rem; z-index:50; }
+    .chat-box { position:fixed; right:1rem; bottom:10rem; width:22rem; max-width:92vw; background:#fff; color:#111827; border:2px solid #e5e7eb; border-radius:1rem; box-shadow:0 10px 30px rgba(0,0,0,0.2); display:none; z-index:50; }
+    .dark .chat-box { background:#111827; color:#f3f4f6; border-color:#374151; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+  <!-- Top Nav -->
+  <header class="sticky top-0 z-50 glass border-b border-gray-200 dark:border-gray-800">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#home" class="text-2xl font-extrabold tracking-tight">mzd<span class="gradient-text">Tech</span></a>
+      <nav class="space-x-6 hidden md:block">
+        <a href="#solutions" class="hover:text-blue-600" data-i18n="nav_solutions">Solutions</a>
+        <a href="#products" class="hover:text-blue-600" data-i18n="nav_products">Products</a>
+        <a href="#portfolio" class="hover:text-blue-600" data-i18n="nav_portfolio">Portfolio</a>
+        <a href="#testimonials" class="hover:text-blue-600" data-i18n="nav_testimonials">Testimonials</a>
+        <a href="#faq" class="hover:text-blue-600" data-i18n="nav_faq">FAQ</a>
+        <a href="#about" class="hover:text-blue-600" data-i18n="nav_about">About</a>
+        <a href="#contact" class="hover:text-blue-600" data-i18n="nav_contact">Contact</a>
+        <a href="#book" class="hover:text-blue-600" data-i18n="nav_book">Book</a>
+      </nav>
+      <div class="flex items-center space-x-3">
+        <button id="langToggle" class="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition" aria-label="Toggle language">EN/DE</button>
+        <button id="themeToggle" class="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition" aria-label="Toggle dark mode">☀️/🌙</button>
+        <a href="#book" class="btn btn-primary hidden sm:inline-flex" data-i18n="cta_book">Book a consultation</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-900 dark:to-blue-950 min-h-screen flex items-center">
+    <div class="particles">
+      <div class="particle" style="left:10%;top:20%;animation-delay:0s"></div>
+      <div class="particle" style="left:80%;top:10%;animation-delay:2s"></div>
+      <div class="particle" style="left:50%;top:60%;animation-delay:4s"></div>
+      <div class="particle" style="left:20%;top:80%;animation-delay:6s"></div>
+      <div class="particle" style="left:70%;top:70%;animation-delay:8s"></div>
+    </div>
+    <svg aria-hidden="true" class="absolute inset-0 w-full h-full opacity-20 dark:opacity-10 network-line" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#60a5fa"/><stop offset="100%" stop-color="#1e3a8a"/></linearGradient></defs>
+      <g stroke="url(#g)" stroke-width="2" fill="none">
+        <path d="M0 100 Q 300 50 600 100 T 1200 100"/>
+        <path d="M0 200 Q 300 150 600 200 T 1200 200"/>
+        <circle cx="200" cy="100" r="5"><animate attributeName="r" from="3" to="8" dur="2s" repeatCount="indefinite"/></circle>
+        <circle cx="500" cy="200" r="5"><animate attributeName="r" from="3" to="8" dur="2s" begin="0.5s" repeatCount="indefinite"/></circle>
+        <circle cx="800" cy="100" r="5"><animate attributeName="r" from="3" to="8" dur="2s" begin="1s" repeatCount="indefinite"/></circle>
+      </g>
+    </svg>
+
+    <div class="relative max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
+      <div class="animate-fade-in">
+        <h1 class="text-5xl sm:text-6xl font-extrabold leading-tight mb-6">Connecting people with <span class="gradient-text">technology</span>.</h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300 mb-8" data-i18n="hero_sub">From web design to cloud and automation—let's turn ideas into reliable software.</p>
+        <div class="flex flex-wrap gap-4">
+          <a href="EliasCV.pdf" class="btn btn-outline" data-i18n="btn_cv">Download CV</a>
+          <a href="#solutions" class="btn btn-primary" data-i18n="btn_view_solutions">See solutions</a>
+        </div>
+      </div>
+      <div class="justify-self-center text-center animate-fade-in animate-delay-2">
+        <div class="float-slow">
+          <img src="mzdtech-logo.png" alt="mzdTech logo" class="w-72 md:w-96 mx-auto drop-shadow-2xl" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Proof Counters (Phase 3) -->
+  <section id="counters" class="py-12 bg-white dark:bg-gray-950">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div class="card"><div class="text-4xl font-extrabold counter" data-target="25">0</div><p class="mt-2 text-gray-600 dark:text-gray-300">Projects</p></div>
+      <div class="card"><div class="text-4xl font-extrabold counter" data-target="12">0</div><p class="mt-2 text-gray-600 dark:text-gray-300">Happy Clients</p></div>
+      <div class="card"><div class="text-4xl font-extrabold counter" data-target="5">0</div><p class="mt-2 text-gray-600 dark:text-gray-300">Years Experience</p></div>
+      <div class="card"><div class="text-4xl font-extrabold counter" data-target="98">0</div><p class="mt-2 text-gray-600 dark:text-gray-300">% On‑time Delivery</p></div>
+    </div>
+  </section>
+
+  <!-- Trust/Skills Bar -->
+  <section class="py-8 bg-white dark:bg-gray-950">
+    <div class="max-w-7xl mx-auto px-6 flex flex-wrap gap-3 items-center justify-center">
+      <span class="badge" style="animation-delay:0s">Java</span>
+      <span class="badge" style="animation-delay:0.2s">C++</span>
+      <span class="badge" style="animation-delay:0.4s">JavaScript</span>
+      <span class="badge" style="animation-delay:0.6s">HTML</span>
+      <span class="badge" style="animation-delay:0.8s">CSS</span>
+      <span class="badge" style="animation-delay:1s">Cloud</span>
+      <span class="badge" style="animation-delay:1.2s">Communication</span>
+    </div>
+  </section>
+
+  <!-- Solutions / Services -->
+  <section id="solutions" class="py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-4xl font-bold mb-12 text-center" data-i18n="solutions_title">Solutions</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <article class="card animate-fade-in">
+          <img class="feature-img mb-4" src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&h=400&fit=crop" alt="Student studying with laptop and books" loading="lazy"/>
+          <h3 class="text-xl font-semibold mb-3">Time Tracking for Students</h3>
+          <p class="text-gray-600 dark:text-gray-300">Simple web app concepts to help students plan, track, and reflect on study time with clean dashboards.</p>
+        </article>
+        <article class="card animate-fade-in animate-delay-1">
+          <img class="feature-img mb-4" src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=600&h=400&fit=crop" alt="Online marketplace shopping interface" loading="lazy"/>
+          <h3 class="text-xl font-semibold mb-3">Digitalflohmarkt</h3>
+          <p class="text-gray-600 dark:text-gray-300">Marketplace prototype ideas: listings, chat, and secure checkout flows optimized for mobile.</p>
+        </article>
+        <article class="card animate-fade-in animate-delay-2">
+          <img class="feature-img mb-4" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop" alt="Team collaboration and feedback session" loading="lazy"/>
+          <h3 class="text-xl font-semibold mb-3">TeamworkFeedback</h3>
+          <p class="text-gray-600 dark:text-gray-300">Lightweight feedback tools for teams: pulse surveys, action items, and clear analytics.</p>
+        </article>
+        <article class="card animate-fade-in animate-delay-3">
+          <img class="feature-img mb-4" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&h=400&fit=crop" alt="Hotel restaurant food service" loading="lazy"/>
+          <h3 class="text-xl font-semibold mb-3">AI HotelFoodMonitoring</h3>
+          <p class="text-gray-600 dark:text-gray-300">Concepts for AI-driven menu insights and inventory suggestions to reduce waste and improve quality.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Gallery (Phase 1) -->
+  <section id="portfolio" class="py-20 bg-white dark:bg-gray-950">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-4xl font-bold mb-12 text-center">Portfolio</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <figure class="card p-0 overflow-hidden cursor-pointer"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80" alt="Landing page project" class="w-full h-56 object-cover" loading="lazy"/><figcaption class="p-4">Landing Page – Startup</figcaption></figure>
+        <figure class="card p-0 overflow-hidden cursor-pointer"><img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=900&q=80" alt="Dashboard project" class="w-full h-56 object-cover" loading="lazy"/><figcaption class="p-4">Analytics Dashboard</figcaption></figure>
+        <figure class="card p-0 overflow-hidden cursor-pointer"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&q=80" alt="Cloud setup" class="w-full h-56 object-cover" loading="lazy"/><figcaption class="p-4">Cloud Setup – SME</figcaption></figure>
+        <figure class="card p-0 overflow-hidden cursor-pointer"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=900&q=80" alt="Mobile prototype" class="w-full h-56 object-cover" loading="lazy"/><figcaption class="p-4">Mobile Prototype</figcaption></figure>
+        <figure class="card p-0 overflow-hidden cursor-pointer"><img src="https://images.unsplash.com/photo-1526483360412-f4dbaf036963?w=900&q=80" alt="E‑commerce" class="w-full h-56 object-cover" loading="lazy"/><figcaption class="p-4">E‑commerce Concept</figcaption></figure>
+        <figure class="card p-0 overflow-hidden cursor-pointer"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=80" alt="DevOps" class="w-full h-56 object-cover" loading="lazy"/><figcaption class="p-4">DevOps Pipeline</figcaption></figure>
+      </div>
+      <div class="lightbox" id="lightbox"><img alt="Preview" id="lightboxImg" src=""/></div>
+    </div>
+  </section>
+
+  <!-- Testimonials (Phase 1) -->
+  <section id="testimonials" class="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-4xl font-bold mb-12 text-center">Testimonials</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="card">
+          <p class="text-lg">“mzdTech modernized our website in days. Clear communication and on‑time delivery.”</p>
+          <div class="mt-4 flex items-center gap-3">
+            <img src="https://i.pravatar.cc/80?img=1" alt="Avatar" class="w-10 h-10 rounded-full"/>
+            <div><p class="font-semibold">Sara K.</p><p class="text-sm text-gray-500 dark:text-gray-400">Café Owner</p></div>
+          </div>
+        </div>
+        <div class="card">
+          <p class="text-lg">“Our prototype helped us validate the idea with clients—great UX and speed.”</p>
+          <div class="mt-4 flex items-center gap-3">
+            <img src="https://i.pravatar.cc/80?img=5" alt="Avatar" class="w-10 h-10 rounded-full"/>
+            <div><p class="font-semibold">Jonas R.</p><p class="text-sm text-gray-500 dark:text-gray-400">Startup Founder</p></div>
+          </div>
+        </div>
+        <div class="card">
+          <p class="text-lg">“Straightforward cloud setup with backups and monitoring. Highly recommend.”</p>
+          <div class="mt-4 flex items-center gap-3">
+            <img src="https://i.pravatar.cc/80?img=11" alt="Avatar" class="w-10 h-10 rounded-full"/>
+            <div><p class="font-semibold">Lea W.</p><p class="text-sm text-gray-500 dark:text-gray-400">Operations Lead</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section id="products" class="py-20 relative overflow-hidden bg-white dark:bg-gray-950">
+    <div class="relative max-w-7xl mx-auto px-6">
+      <h2 class="text-4xl font-bold mb-12 text-center" data-i18n="products_title">Products</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="card animate-fade-in">
+          <img class="feature-img mb-4" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Modern website design on laptop" loading="lazy"/>
+          <h3 class="text-2xl font-semibold mb-2">Starter Website</h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-4">1‑page site, responsive design, contact form.</p>
+          <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300 mb-6 space-y-1">
+            <li>Delivery: ~1 week</li>
+            <li>Tech: HTML/CSS/JS</li>
+          </ul>
+          <a href="#book" class="btn btn-primary w-full justify-center" data-i18n="cta_get_started">Get started</a>
+        </div>
+        <div class="card animate-fade-in animate-delay-1">
+          <img class="feature-img mb-4" src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&h=400&fit=crop" alt="Web application development" loading="lazy"/>
+          <h3 class="text-2xl font-semibold mb-2">Web App Prototype</h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-4">Clickable prototype for your idea (e.g., Digitalflohmarkt).</p>
+          <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300 mb-6 space-y-1">
+            <li>Delivery: 2–3 weeks</li>
+            <li>Tech: JS/Cloud</li>
+          </ul>
+          <a href="#book" class="btn btn-primary w-full justify-center" data-i18n="cta_get_started">Get started</a>
+        </div>
+        <div class="card animate-fade-in animate-delay-2">
+          <img class="feature-img mb-4" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop" alt="Cloud computing infrastructure" loading="lazy"/>
+          <h3 class="text-2xl font-semibold mb-2">Cloud Setup</h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-4">Deploy small apps and automate backups/monitoring.</p>
+          <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300 mb-6 space-y-1">
+            <li>Delivery: ~2 weeks</li>
+            <li>Tech: AWS/Azure/GCP</li>
+          </ul>
+          <a href="#book" class="btn btn-primary w-full justify-center" data-i18n="cta_get_started">Get started</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Timeline (Phase 2) -->
+  <section id="process" class="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-4xl font-bold mb-12 text-center">Process</h2>
+      <ol class="relative border-l-2 border-blue-200 dark:border-blue-900 max-w-3xl mx-auto">
+        <li class="mb-10 ml-6">
+          <span class="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white">1</span>
+          <h3 class="text-xl font-semibold">Discovery Call</h3>
+          <p class="text-gray-600 dark:text-gray-300">Understand goals, scope, and success metrics.</p>
+        </li>
+        <li class="mb-10 ml-6">
+          <span class="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white">2</span>
+          <h3 class="text-xl font-semibold">Proposal & Timeline</h3>
+          <p class="text-gray-600 dark:text-gray-300">Clear deliverables, budget, and milestones.</p>
+        </li>
+        <li class="mb-10 ml-6">
+          <span class="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white">3</span>
+          <h3 class="text-xl font-semibold">Build & Iterate</h3>
+          <p class="text-gray-600 dark:text-gray-300">Weekly check‑ins and rapid iterations.</p>
+        </li>
+        <li class="ml-6">
+          <span class="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white">4</span>
+          <h3 class="text-xl font-semibold">Launch & Support</h3>
+          <p class="text-gray-600 dark:text-gray-300">Handover, docs, and post‑launch support.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
+    <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-3 gap-12 items-start">
+      <div class="md:order-first animate-fade-in"><img src="selfPhoto.jpg" alt="Elias portrait" class="rounded-2xl shadow-2xl w-full object-cover hover:scale-105 transition-transform duration-500" /></div>
+      <div class="md:col-span-2 animate-fade-in animate-delay-1">
+        <h2 class="text-4xl font-bold mb-6" data-i18n="about_title">About Me</h2>
+        <div class="space-y-4 text-lg text-gray-700 dark:text-gray-200">
+          <p>I'm a final‑year Computer Science student at Hochschule Osnabrück with experience in software development, web design, and cloud technologies. I work with Java, C++, JavaScript, HTML, CSS, and I enjoy building clear, user‑friendly digital solutions.</p>
+          <p>Before working in tech, I spent several years as a German–English–Persian interpreter, which helped me develop strong communication skills and the ability to explain complex ideas clearly.</p>
+          <p>I bring a creative and solution‑focused mindset, and I'm always looking for ways to improve processes and create better results for my clients.</p>
+        </div>
+        <div class="mt-8 flex gap-4">
+          <a href="EliasCV.pdf" class="btn btn-outline" data-i18n="btn_cv">Download CV</a>
+          <a href="mailto:eliasmawlawyzada@gmail.com" class="btn btn-primary">Email</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ (Phase 2) -->
+  <section id="faq" class="py-20 bg-white dark:bg-gray-950">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-4xl font-bold mb-8 text-center">FAQ</h2>
+      <div class="space-y-4">
+        <details class="card"><summary class="cursor-pointer text-lg font-semibold">How quickly can we start?</summary><p class="mt-3 text-gray-600 dark:text-gray-300">Usually within a week. For urgent projects, I'll try to accommodate.</p></details>
+        <details class="card"><summary class="cursor-pointer text-lg font-semibold">What tech stack do you use?</summary><p class="mt-3 text-gray-600 dark:text-gray-300">Modern HTML/CSS/JS for sites, React or Vanilla for prototypes, and AWS/Azure/GCP for cloud.</p></details>
+        <details class="card"><summary class="cursor-pointer text-lg font-semibold">Do you offer maintenance?</summary><p class="mt-3 text-gray-600 dark:text-gray-300">Yes—monthly plans for backups, updates, and monitoring.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking -->
+  <section id="book" class="py-20 bg-white dark:bg-gray-950">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-4xl font-bold mb-12 text-center" data-i18n="book_title">Book a consultation</h2>
+      <div class="grid md:grid-cols-2 gap-10 items-start">
+        <div class="card animate-fade-in">
+          <h3 class="text-xl font-semibold mb-4" data-i18n="book_calendar">Calendar</h3>
+          <div class="rounded-xl overflow-hidden border-2 border-gray-200 dark:border-gray-700 mb-4">
+            <iframe title="Booking" src="https://calendly.com/your-username/30min" class="w-full h-96"></iframe>
+          </div>
+          <img class="feature-img" src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=300&fit=crop" alt="Calendar and scheduling" loading="lazy"/>
+        </div>
+        <form id="bookingForm" class="card space-y-5 animate-fade-in animate-delay-1">
+          <h3 class="text-xl font-semibold" data-i18n="form_title">Quick booking form</h3>
+          <div>
+            <label class="block text-sm font-medium mb-2" for="name" data-i18n="form_name">Name</label>
+            <input id="name" name="name" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:border-blue-500 focus:outline-none transition" required />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2" for="email">Email</label>
+            <input id="email" type="email" name="email" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:border-blue-500 focus:outline-none transition" required />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2" for="datetime" data-i18n="form_datetime">Preferred date & time</label>
+            <input id="datetime" type="datetime-local" name="datetime" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:border-blue-500 focus:outline-none transition" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2" for="message" data-i18n="form_message">Message</label>
+            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:border-blue-500 focus:outline-none transition"></textarea>
+          </div>
+          <button class="btn btn-primary w-full justify-center" type="submit" data-i18n="form_submit">Send request</button>
+          <p id="formStatus" class="text-sm text-center"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold mb-6" data-i18n="contact_title">Contact</h2>
+      <p class="text-lg mb-3">Email: <a class="text-blue-600 hover:text-blue-700 underline font-semibold" href="mailto:eliasmawlawyzada@gmail.com">eliasmawlawyzada@gmail.com</a></p>
+      <p class="mb-10 text-gray-600 dark:text-gray-400" data-i18n="contact_alt">Prefer WhatsApp or another channel? Add it here.</p>
+      <a href="#book" class="btn btn-primary" data-i18n="cta_book">Book a consultation</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 border-t-2 border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+      <p class="text-gray-600 dark:text-gray-400">© <span id="year"></span> mzdTech • All rights reserved.</p>
+      <nav class="flex gap-6">
+        <a href="#about" class="hover:text-blue-600 transition" data-i18n="nav_about">About</a>
+        <a href="#solutions" class="hover:text-blue-600 transition" data-i18n="nav_solutions">Solutions</a>
+        <a href="#products" class="hover:text-blue-600 transition" data-i18n="nav_products">Products</a>
+        <a href="#portfolio" class="hover:text-blue-600 transition" data-i18n="nav_portfolio">Portfolio</a>
+        <a href="#testimonials" class="hover:text-blue-600 transition" data-i18n="nav_testimonials">Testimonials</a>
+        <a href="#faq" class="hover:text-blue-600 transition" data-i18n="nav_faq">FAQ</a>
+        <a href="#contact" class="hover:text-blue-600 transition" data-i18n="nav_contact">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp (Phase 1) -->
+  <a class="wa-fab btn btn-primary" target="_blank" rel="noopener" aria-label="WhatsApp chat"
+     href="https://wa.me/491234567890?text=Hi%20Elias%2C%20I%27m%20interested%20in%20a%20project.%20Can%20we%20chat%3F">
+    <!-- WhatsApp icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M20.52 3.48A11.86 11.86 0 0012.06 0 11.94 11.94 0 000 12.06a11.86 11.86 0 003.48 8.46L0 24l3.6-3.42a12 12 0 008.46 3.48A11.94 11.94 0 0024 11.94 11.86 11.86 0 0020.52 3.48zm-8.46 18A9.93 9.93 0 015.1 19.1l-.36-.21-2.14 2.1 2.22-2.16-.23-.36a9.93 9.93 0 01-1.44-5.13 10 10 0 1010 10z"/><path d="M17.11 13.79c-.26-.13-1.54-.77-1.78-.86s-.41-.13-.58.13-.66.86-.81 1-.3.19-.56.06a8.1 8.1 0 01-2.36-1.46 8.82 8.82 0 01-1.63-2 1.84 1.84 0 01.4-2c.11-.13.26-.19.4-.19s.28 0 .4 0 .3 0 .45.35.57 1.35.62 1.45.09.26 0 .42-.17.26-.3.42-.26.19-.4.32-.17.19-.06.38a6.62 6.62 0 001.22 1.46 5.87 5.87 0 001.73 1.12c.21.13.34.13.47 0s.56-.65.71-.87.3-.19.49-.11 1.27.6 1.48.71.36.17.42.26a1.85 1.85 0 01-.12 1.06c-.11.32-.54 1-1.05 1.6z"/></svg>
+    WhatsApp
+  </a>
+
+  <!-- Live Chat Widget (Phase 3) - lightweight, localStorage backed -->
+  <button id="chatFab" class="chat-fab btn btn-primary" aria-label="Open chat">💬 Chat</button>
+  <div id="chatBox" class="chat-box">
+    <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+      <div class="font-semibold">Live Chat</div>
+      <button id="chatClose" class="text-sm px-2 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800">✕</button>
+    </div>
+    <div id="chatLog" class="p-4 space-y-2 max-h-60 overflow-auto text-sm"></div>
+    <form id="chatForm" class="p-3 flex gap-2 border-t border-gray-200 dark:border-gray-700">
+      <input id="chatInput" class="flex-1 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 focus:outline-none" placeholder="Type your message…" />
+      <button class="btn btn-primary">Send</button>
+    </form>
+    <p class="px-4 pb-4 text-xs text-gray-500 dark:text-gray-400">This demo stores messages locally. For production, plug in a provider (Crisp, Tawk.to, Intercom).</p>
+  </div>
+
+  <!-- Lead Magnet (Phase 3) -->
+  <div id="leadBar" class="fixed left-1/2 transform -translate-x-1/2 bottom-0 z-40 w-[95%] md:w-[700px] bg-white dark:bg-gray-800 rounded-t-xl shadow-2xl border border-gray-200 dark:border-gray-700 p-4 flex items-center justify-between hidden">
+    <div>
+      <p class="font-semibold">Free: Website Launch Checklist (PDF)</p>
+      <p class="text-sm text-gray-600 dark:text-gray-300">Get the 10‑step checklist I use with clients.</p>
+    </div>
+    <div class="flex gap-2">
+      <input id="leadEmail" type="email" placeholder="you@email.com" class="px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-700"/>
+      <button id="leadBtn" class="btn btn-primary">Get it</button>
+      <button id="leadClose" class="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700">Later</button>
+    </div>
+  </div>
+
+  <script>
+    // --- Simple i18n (placeholder) ---
+    const i18n = {
+      en: { nav_solutions:'Solutions', nav_products:'Products', nav_about:'About', nav_contact:'Contact', nav_book:'Book', nav_faq:'FAQ', nav_portfolio:'Portfolio', nav_testimonials:'Testimonials', cta_book:'Book a consultation', products_title:'Products', solutions_title:'Solutions', about_title:'About Me', book_title:'Book a consultation', book_calendar:'Calendar', form_title:'Quick booking form', form_name:'Name', form_datetime:'Preferred date & time', form_message:'Message', form_submit:'Send request', contact_title:'Contact', hero_sub:"From web design to cloud and automation—let's turn ideas into reliable software.", cta_get_started:'Get started' },
+      de: { nav_solutions:'Lösungen', nav_products:'Produkte', nav_about:'Über mich', nav_contact:'Kontakt', nav_book:'Buchen', nav_faq:'FAQ', nav_portfolio:'Portfolio', nav_testimonials:'Referenzen', cta_book:'Beratung buchen', products_title:'Produkte', solutions_title:'Lösungen', about_title:'Über mich', book_title:'Beratung buchen', book_calendar:'Kalender', form_title:'Schnellbuchung', form_name:'Name', form_datetime:'Bevorzugtes Datum & Uhrzeit', form_message:'Nachricht', form_submit:'Anfrage senden', contact_title:'Kontakt', hero_sub:'Von Webdesign bis Cloud & Automatisierung – wir machen aus Ideen verlässliche Software.', cta_get_started:'Los gehts' }
+    };
+    const langToggle = document.getElementById('langToggle');
+    const themeToggle = document.getElementById('themeToggle');
+    const nodes = document.querySelectorAll('[data-i18n]');
+    const storedLang = localStorage.getItem('lang') || 'en';
+    function applyLang(l){ nodes.forEach(n=>{ const k=n.dataset.i18n; if(i18n[l] && i18n[l][k]) n.textContent=i18n[l][k]; }); document.documentElement.lang=l; localStorage.setItem('lang', l); }
+    applyLang(storedLang);
+    langToggle.addEventListener('click', ()=> applyLang((localStorage.getItem('lang')||'en')==='en'?'de':'en'));
+
+    // --- Year ---
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // --- Booking form (no backend) ---
+    document.getElementById('bookingForm')?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target).entries());
+      localStorage.setItem('bookingDraft', JSON.stringify(data));
+      document.getElementById('formStatus').textContent = 'Thanks! I\'ll reply by email shortly.';
+      e.target.reset();
+    });
+
+    // --- Lightbox for portfolio ---
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightboxImg');
+    document.querySelectorAll('#portfolio figure img').forEach(img=>{
+      img.addEventListener('click',()=>{ lbImg.src = img.src.replace('w=900','w=1600'); lb.style.display='flex'; });
+    });
+    lb.addEventListener('click',()=> lb.style.display='none');
+
+    // --- Counters animation ---
+    const counters = document.querySelectorAll('.counter');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach((e)=>{
+        if(e.isIntersecting){
+          const el = e.target; const target = +el.dataset.target; let cur = 0; const step = Math.max(1, Math.ceil(target/80));
+          const tick = ()=>{ cur += step; if(cur>=target){ el.textContent = target; } else { el.textContent = cur; requestAnimationFrame(tick); } };
+          tick(); io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(c=> io.observe(c));
+
+    // --- Dark mode toggle (Phase 2) ---
+    const THEME_KEY = 'theme';
+    const savedTheme = localStorage.getItem(THEME_KEY);
+    if(savedTheme){ document.documentElement.classList.toggle('dark', savedTheme==='dark'); }
+    themeToggle.addEventListener('click', ()=>{
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem(THEME_KEY, isDark?'dark':'light');
+    });
+
+    // --- Lead magnet (Phase 3) ---
+    const leadBar = document.getElementById('leadBar');
+    const leadBtn = document.getElementById('leadBtn');
+    const leadClose = document.getElementById('leadClose');
+    const leadEmail = document.getElementById('leadEmail');
+    // Show after 7 seconds once per week
+    if(!localStorage.getItem('leadSeen') || Date.now() - (+localStorage.getItem('leadSeen')) > 7*24*3600*1000){
+      setTimeout(()=> leadBar.classList.remove('hidden'), 7000);
+    }
+    leadClose.addEventListener('click', ()=>{ leadBar.classList.add('hidden'); localStorage.setItem('leadSeen', Date.now()); });
+    leadBtn.addEventListener('click', ()=>{
+      if(leadEmail.value && leadEmail.validity.valid){
+        const list = JSON.parse(localStorage.getItem('leadEmails')||'[]'); list.push({ email: leadEmail.value, ts: Date.now() });
+        localStorage.setItem('leadEmails', JSON.stringify(list));
+        // trigger download (replace with actual asset path)
+        const a = document.createElement('a'); a.href = 'launch-checklist.pdf'; a.download = 'Website-Launch-Checklist.pdf'; a.click();
+        leadBar.classList.add('hidden'); localStorage.setItem('leadSeen', Date.now());
+      } else { alert('Please enter a valid email.'); }
+    });
+
+    // --- Live Chat (Phase 3) ---
+    const chatFab = document.getElementById('chatFab');
+    const chatBox = document.getElementById('chatBox');
+    const chatClose = document.getElementById('chatClose');
+    const chatForm = document.getElementById('chatForm');
+    const chatInput = document.getElementById('chatInput');
+    const chatLog = document.getElementById('chatLog');
+    const CHAT_KEY = 'mzd_chat_log';
+    const renderChat = ()=>{
+      chatLog.innerHTML = '';
+      const msgs = JSON.parse(localStorage.getItem(CHAT_KEY)||'[]');
+      msgs.forEach(m=>{
+        const row = document.createElement('div');
+        row.className = 'flex ' + (m.role==='user'?'justify-end':'justify-start');
+        row.innerHTML = `<div class="max-w-[80%] px-3 py-2 rounded-xl ${m.role==='user'?'bg-blue-600 text-white':'bg-gray-100 dark:bg-gray-800'}">${m.text}</div>`;
+        chatLog.appendChild(row);
+      });
+      chatLog.scrollTop = chatLog.scrollHeight;
+    };
+    renderChat();
+    chatFab.addEventListener('click', ()=>{ chatBox.style.display='block'; });
+    chatClose.addEventListener('click', ()=>{ chatBox.style.display='none'; });
+    chatForm.addEventListener('submit', (e)=>{
+      e.preventDefault(); const text = chatInput.value.trim(); if(!text) return; const msgs = JSON.parse(localStorage.getItem(CHAT_KEY)||'[]');
+      msgs.push({ role:'user', text, t: Date.now() });
+      // auto responder placeholder
+      msgs.push({ role:'bot', text: 'Thanks! I\'ll get back to you via email shortly. You can also book a slot in the calendar above.', t: Date.now() });
+      localStorage.setItem(CHAT_KEY, JSON.stringify(msgs)); chatInput.value=''; renderChat();
+    });
+
+    // --- Optional: Third‑party chat snippet placeholder (commented) ---
+    // Paste your provider snippet below and remove the local widget above.
+    // Tawk.to example:
+    // var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    // (function(){var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    // s1.async=true; s1.src='https://embed.tawk.to/PROPERTY_ID/DEFAULT'; s1.charset='UTF-8'; s1.setAttribute('crossorigin','*'); s0.parentNode.insertBefore(s1,s0);})();
+  </script>
+</body>
+</html>
