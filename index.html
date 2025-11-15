@@ -1,1104 +1,1719 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>mzdTech – IT Solutions</title>
-  <meta name="description" content="mzdTech: IT solutions, web design, cloud, and automation. Book a consult and explore products and services." />
+  <title>mzdTech – IT Solutions, Products & Education</title>
+  <meta name="description" content="mzdTech: Professional IT services, innovative solutions, and programming education." />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    :root { --brand:#2563eb; --brand-dark:#1e40af; --accent:#60a5fa; --header-h:72px; }
+    :root { --brand:#2563eb; --brand-dark:#1e40af; --accent:#60a5fa; }
     *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Helvetica Neue',Arial;overflow-x:hidden;padding-bottom:0}
+    body{font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;background:#f0f4f9;color:#000}
     html{scroll-behavior:smooth}
-    section[id]{scroll-margin-top:var(--header-h)}
+    html.dark body{background:#0a0e1a;color:#fff}
 
-    /* Glass effect */
-    .glass{backdrop-filter:saturate(180%) blur(12px);background:rgba(255,255,255,.9);transition:all .3s ease}
-    .dark .glass{background:rgba(17,24,39,.9)}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
-    /* Buttons */
-    .btn{display:inline-flex;align-items:center;padding:.875rem 1.75rem;border-radius:.75rem;font-weight:600;transition:all .3s ease;position:relative;overflow:hidden}
-    .btn::before{content:'';position:absolute;top:50%;left:50%;width:0;height:0;border-radius:50%;background:rgba(255,255,255,.3);transform:translate(-50%,-50%);transition:width .6s,height .6s}
-    .btn:hover::before{width:300px;height:300px}
+    .welcome-page{animation:fadeIn 0.8s ease-out}
+    .logo-animate{animation:float 4s ease-in-out infinite}
+    .page-transition{animation:fadeIn 0.5s ease-out}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:.75rem 1.6rem;border-radius:.75rem;font-weight:600;transition:all .25s ease;cursor:pointer}
     .btn-primary{background:linear-gradient(135deg,var(--brand) 0%,var(--brand-dark) 100%);color:#fff;box-shadow:0 4px 15px rgba(37,99,235,.4)}
     .btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(37,99,235,.6)}
     .btn-outline{border:2px solid var(--brand);color:var(--brand);background:transparent}
-    .dark .btn-outline{color:#60a5fa;border-color:#60a5fa}
-    .btn-outline:hover{background:var(--brand);color:#fff;transform:translateY(-2px)}
+    .btn-outline:hover{background:var(--brand);color:#fff}
+    html.dark .btn-outline{border-color:#60a5fa;color:#60a5fa}
 
-    /* Cards */
-    .card{border-radius:1.25rem;padding:1.5rem;background:#fff;box-shadow:0 4px 6px rgba(0,0,0,.07);transition:all .4s cubic-bezier(.175,.885,.32,1.275);position:relative;overflow:hidden}
+    .card{border-radius:1.25rem;padding:1.5rem;background:#fff;box-shadow:0 4px 6px rgba(0,0,0,.07);transition:all .25s ease;position:relative;overflow:hidden;color:#1f2937}
     .card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,var(--brand),var(--accent));transform:scaleX(0);transition:transform .3s ease}
     .card:hover::before{transform:scaleX(1)}
-    .card:hover{transform:translateY(-8px);box-shadow:0 12px 28px rgba(0,0,0,.15)}
-    .dark .card{background:#1f2937;box-shadow:0 4px 6px rgba(0,0,0,.3)}
-    .dark .card:hover{box-shadow:0 12px 28px rgba(0,0,0,.5)}
+    .card:hover{transform:translateY(-6px);box-shadow:0 12px 28px rgba(0,0,0,.15)}
+    .dark .card{background:#1f2937;color:#f3f4f6}
 
-    /* Badge */
-    .badge{display:inline-block;font-size:.8rem;font-weight:600;padding:.5rem 1rem;border-radius:9999px;background:linear-gradient(135deg,#dbeafe 0%,#bfdbfe 100%);color:#1e40af;transition:all .3s ease}
-    .badge:hover{transform:scale(1.1);box-shadow:0 4px 12px rgba(37,99,235,.3)}
-    .dark .badge{background:linear-gradient(135deg,#1e3a8a 0%,#1e40af 100%);color:#bfdbfe}
+    .badge{display:inline-block;font-size:.8rem;font-weight:600;padding:.35rem .9rem;border-radius:9999px;background:linear-gradient(135deg,#dbeafe 0%,#bfdbfe 100%);color:#1e40af}
 
-    /* Animations */
-    @keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-    @keyframes slideInLeft{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
-    @keyframes slideInRight{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-    @keyframes floatSlow{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-20px) rotate(3deg)}}
-    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    .video-container{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:1rem}
+    .video-container iframe{position:absolute;top:0;left:0;width:100%;height:100%}
 
-    .animate-fade-in{animation:fadeInUp 1s ease-out forwards;opacity:0}
-    .animate-fade-in-delay{animation:fadeInUp 1s ease-out .3s forwards;opacity:0}
-    .animate-slide-left{animation:slideInLeft 1s ease-out forwards;opacity:0}
-    .animate-slide-right{animation:slideInRight 1s ease-out forwards;opacity:0}
-    .float{animation:float 3s ease-in-out infinite}
-    .float-slow{animation:floatSlow 6s ease-in-out infinite}
-    .pulse-slow{animation:pulse 3s ease-in-out infinite}
-
-    .gradient-text{background:linear-gradient(135deg,var(--brand) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-
-    /* Particles */
-    .particles{position:absolute;width:100%;height:100%;overflow:hidden;pointer-events:none;z-index:0}
-    .particle{position:absolute;width:6px;height:6px;background:var(--accent);border-radius:50%;opacity:.3;animation:particleFloat 20s infinite ease-in-out}
-    @keyframes particleFloat{0%,100%{transform:translate(0,0)}25%{transform:translate(120px,-120px)}50%{transform:translate(-80px,-240px)}75%{transform:translate(180px,-180px)}}
-
-    .feature-img{width:100%;height:220px;object-fit:cover;border-radius:1rem;transition:transform .4s ease}
-    .card:hover .feature-img{transform:scale(1.05)}
-
-    nav a{position:relative;transition:color .3s ease}
-    nav a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--brand);transition:width .3s ease}
-    nav a:hover::after{width:100%}
-
-    /* Stat counter */
-    .stat-card{background:linear-gradient(135deg,#3b82f6 0%,#1e40af 100%);color:#fff;border-radius:1rem;padding:2rem;text-align:center;transform:perspective(1000px) rotateY(0);transition:all .4s ease}
-    .stat-card:hover{transform:perspective(1000px) rotateY(5deg) scale(1.05)}
-
-    /* Process timeline */
-    .timeline-item{position:relative;padding-left:3rem}
-    .timeline-item::before{content:'';position:absolute;left:0;top:0;width:2px;height:100%;background:linear-gradient(180deg,var(--brand),var(--accent))}
-    .timeline-item::after{content:'';position:absolute;left:-6px;top:0;width:14px;height:14px;border-radius:50%;background:var(--brand);border:3px solid #fff}
-    .dark .timeline-item::after{border-color:#1f2937}
-
-    /* Feature icons */
-    .feature-icon{width:4rem;height:4rem;border-radius:1rem;background:linear-gradient(135deg,#dbeafe 0%,#bfdbfe 100%);display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:1rem;transition:all .3s ease}
-    .dark .feature-icon{background:linear-gradient(135deg,#1e3a8a 0%,#1e40af 100%)}
-    .card:hover .feature-icon{transform:rotateY(360deg)}
-
-    /* Chat widget */
-    .wa-fab{position:fixed;right:1rem;bottom:1rem;z-index:50}
-    .chat-fab{position:fixed;right:1rem;bottom:5rem;z-index:50}
-    .chat-box{position:fixed;right:1rem;bottom:10rem;width:22rem;max-width:92vw;background:#fff;color:#111827;border:2px solid #e5e7eb;border-radius:1rem;box-shadow:0 10px 30px rgba(0,0,0,.2);display:none;z-index:50}
-    .dark .chat-box{background:#1f2937;color:#f3f4f6;border-color:#374151}
-
-    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;align-items:center;justify-content:center;z-index:60}
-    .lightbox img{max-width:90vw;max-height:80vh;border-radius:1rem}
-
-    @media (max-width:640px){
-      h1{font-size:2rem;line-height:1.2}
-      .btn{padding:.7rem 1.2rem}
-      .card{padding:1.25rem}
-      .feature-img{height:180px}
+    .section-btn{
+      padding:3rem;
+      border-radius:1.5rem;
+      cursor:pointer;
+      transition:all 0.3s ease;
+      border:none;
+      box-shadow:0 10px 30px rgba(0,0,0,.2);
+      color:#fff !important;
     }
-    @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}}
-    img,video,iframe,canvas,svg{max-width:100%;height:auto}
-
-    /* ==============================
-       LIGHT MODE ENFORCERS
-       Two-color gradient background + black text everywhere
-       ============================== */
-    /* Two‑color gradient for LIGHT mode top-level background */
-    html:not(.dark) body {
-      background-image: linear-gradient(135deg, #eff6ff 0%, #ede9fe 100%) !important; /* blue-50 to violet-50 */
-      color: #000;
+    .section-btn:hover{
+      transform:translateY(-5px);
+      box-shadow:0 15px 40px rgba(0,0,0,.3);
+    }
+    .section-btn *{
+      color:#fff !important;
+      pointer-events:none;
     }
 
-    /* Make ALL typical Tailwind text utilities render black in LIGHT mode */
-    html:not(.dark) .text-gray-900,
-    html:not(.dark) .text-gray-800,
-    html:not(.dark) .text-gray-700,
-    html:not(.dark) .text-gray-600,
-    html:not(.dark) .text-gray-500,
-    html:not(.dark) .text-gray-400,
-    html:not(.dark) .text-gray-300,
-    html:not(.dark) .text-blue-100,
-    html:not(.dark) .text-white,
-    html:not(.dark) .dark\:text-gray-100,
-    html:not(.dark) .dark\:text-white,
-    html:not(.dark) .dark\:text-gray-300 {
-      color:#000 !important;
+    .ceo-card{
+      background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+      color:#fff;
+      border-radius:1.5rem;
+      padding:2rem;
+      box-shadow:0 10px 40px rgba(102,126,234,.4);
     }
 
-    /* Gradient text should be black in LIGHT mode */
-    html:not(.dark) .gradient-text {
-      background:none !important;
-      -webkit-text-fill-color:#000 !important;
-      color:#000 !important;
+    /* Back-to-top button */
+    #backToTopBtn{display:none}
+
+    /* Simple active nav link */
+    .nav-link-active{color:#60a5fa !important;font-weight:600;}
+
+    /* Modal basics */
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.6);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:50;
     }
+    .modal-hidden{display:none !important;}
 
-    /* Links/nav hover remain black in LIGHT mode */
-    html:not(.dark) nav a:hover { color:#000 !important; }
+    /* Wizard steps */
+    .wizard-step{display:none}
+    .wizard-step-active{display:block}
 
-    /* Outline buttons use black text/border in LIGHT mode */
-    html:not(.dark) .btn-outline { color:#000 !important; border-color:#000 !important; }
-
-    /* Preserve readable white text ON primary buttons even in LIGHT mode */
-    html:not(.dark) .btn-primary { color:#fff !important; }
   </style>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-purple-50 text-black dark:bg-gradient-to-br dark:from-gray-950 dark:via-slate-900 dark:to-blue-950 dark:text-gray-100">
-  <!-- Header -->
-  <header class="sticky top-0 z-50 glass border-b border-gray-200 dark:border-gray-700">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <button id="menuToggle" class="md:hidden px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800" aria-label="Open menu">☰</button>
-        <a href="#home" class="text-2xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100"><span data-i18n="brand.name">mzd</span><span class="gradient-text">Tech</span></a>
-      </div>
-      <nav class="space-x-6 hidden md:block">
-        <a id="navSolutions" data-i18n="nav.solutions" href="#solutions" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Solutions</a>
-        <a id="navFeatures" data-i18n="nav.features" href="#features" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Features</a>
-        <a id="navProcess" data-i18n="nav.process" href="#process" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Process</a>
-        <a id="navPortfolio" data-i18n="nav.portfolio" href="#portfolio" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Portfolio</a>
-        <a id="navTestimonials" data-i18n="nav.testimonials" href="#testimonials" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Testimonials</a>
-        <a id="navPricing" data-i18n="nav.pricing" href="#pricing" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Pricing</a>
-        <a id="navFaq" data-i18n="nav.faq" href="#faq" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">FAQ</a>
-        <a id="navContact" data-i18n="nav.contact" href="#contact" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Contact</a>
-      </nav>
-      <div class="flex items-center gap-3">
-        <button id="langToggle" class="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300" aria-label="Toggle language">EN/DE</button>
-        <button id="themeToggle" class="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300" aria-label="Toggle dark mode">☀️/🌙</button>
-        <img src="mzdtech-logo.png" alt="mzdTech logo" class="hidden sm:block w-12 h-12 object-contain" />
-      </div>
-    </div>
-    <!-- Mobile menu -->
-    <div id="mobileMenu" class="md:hidden hidden px-6 pb-4 space-y-3 bg-white/95 dark:bg-gray-900/95 border-t border-gray-200 dark:border-gray-700">
-      <a data-i18n="nav.solutions" class="block text-gray-700 dark:text-gray-300" href="#solutions">Solutions</a>
-      <a data-i18n="nav.features" class="block text-gray-700 dark:text-gray-300" href="#features">Features</a>
-      <a data-i18n="nav.process" class="block text-gray-700 dark:text-gray-300" href="#process">Process</a>
-      <a data-i18n="nav.portfolio" class="block text-gray-700 dark:text-gray-300" href="#portfolio">Portfolio</a>
-      <a data-i18n="nav.testimonials" class="block text-gray-700 dark:text-gray-300" href="#testimonials">Testimonials</a>
-      <a data-i18n="nav.pricing" class="block text-gray-700 dark:text-gray-300" href="#pricing">Pricing</a>
-      <a data-i18n="nav.faq" class="block text-gray-700 dark:text-gray-300" href="#faq">FAQ</a>
-      <a data-i18n="nav.contact" class="block text-gray-700 dark:text-gray-300" href="#contact">Contact</a>
-    </div>
-  </header>
+<body>
 
-  <!-- Scroll progress -->
-  <div id="scrollProgress" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-600 to-purple-600 z-[60]" style="width:0"></div>
+  <body>
 
-  <!-- Hero -->
-  <section id="home" class="relative overflow-hidden py-20 md:py-32">
-    <div class="particles">
-      <div class="particle" style="left:10%;top:20%;animation-delay:0s"></div>
-      <div class="particle" style="left:80%;top:10%;animation-delay:2s"></div>
-      <div class="particle" style="left:50%;top:60%;animation-delay:4s"></div>
-      <div class="particle" style="left:20%;top:80%;animation-delay:6s"></div>
-      <div class="particle" style="left:70%;top:70%;animation-delay:8s"></div>
-      <div class="particle" style="left:30%;top:40%;animation-delay:10s"></div>
-    </div>
-    <div class="max-w-7xl mx-auto px-6 md:px-8 grid md:grid-cols-2 gap-12 items-center relative z-10">
-      <div class="animate-fade-in">
-        <h1 data-i18n="hero.title" class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-6 text-gray-900 dark:text-white">Connecting people with <span class="gradient-text">technology</span></h1>
-        <p data-i18n="hero.subtitle" class="text-lg sm:text-xl text-gray-700 dark:text-gray-300 mb-8">From web design to cloud and automation, let's turn ideas into reliable software.</p>
-        <div class="flex flex-wrap gap-4">
-          <a data-i18n="cta.getStarted" href="#contact" class="btn btn-primary">Get Started</a>
-          <a data-i18n="cta.explore" href="#solutions" class="btn btn-outline">Explore Solutions</a>
-        </div>
-      </div>
-      <div class="justify-self-center text-center animate-fade-in-delay">
-        <div class="float-slow">
-          <img src="mzdtech-logo.png" alt="mzdTech illustration" class="w-80 md:w-[28rem] mx-auto drop-shadow-2xl"/>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- GLOBAL CONTROLS (theme + language only) -->
+<div class="fixed top-4 right-4 z-50 flex gap-3">
+  <!-- Theme toggle -->
+  <button
+    id="themeToggle"
+    class="px-3 py-2 rounded-2xl border border-gray-300 dark:border-gray-600 bg-white/80 dark:bg-black/60 backdrop-blur text-xs md:text-sm flex items-center gap-2 shadow-md hover:shadow-lg hover:-translate-y-[2px] transition"
+    aria-label="Toggle dark mode"
+  >
+    <span id="themeIcon">🌙</span>
+    <span id="themeLabel" class="font-semibold">Dark</span>
+  </button>
 
-  <!-- Stats -->
-  <section class="py-16 bg-white/50 dark:bg-gray-900/50 backdrop-blur">
-    <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6">
-      <div class="stat-card">
-        <div class="text-5xl font-extrabold counter" data-target="25">0</div>
-        <p class="mt-2 text-blue-100" data-i18n="stats.projects">Projects Delivered</p>
-      </div>
-      <div class="stat-card">
-        <div class="text-5xl font-extrabold counter" data-target="12">0</div>
-        <p class="mt-2 text-blue-100" data-i18n="stats.clients">Happy Clients</p>
-      </div>
-      <div class="stat-card">
-        <div class="text-5xl font-extrabold counter" data-target="5">0</div>
-        <p class="mt-2 text-blue-100" data-i18n="stats.years">Years Experience</p>
-      </div>
-      <div class="stat-card">
-        <div class="text-5xl font-extrabold counter" data-target="98">0</div>
-        <p class="mt-2 text-blue-100" data-i18n="stats.ontime">% On‑time</p>
-      </div>
-    </div>
-  </section>
+  <!-- Language toggle -->
+  <button
+    id="langToggle"
+    class="px-3 py-2 rounded-2xl border border-gray-300 dark:border-gray-600 bg-white/80 dark:bg-black/60 backdrop-blur text-xs md:text-sm font-semibold shadow-md hover:shadow-lg hover:-translate-y-[2px] transition"
+  >
+    DE
+  </button>
+</div>
 
-  <!-- Skills -->
-  <section class="py-12">
-    <div class="max-w-7xl mx-auto px-6 flex flex-wrap gap-3 items-center justify-center">
-      <span class="badge float">Java</span>
-      <span class="badge float" style="animation-delay:.2s">C++</span>
-      <span class="badge float" style="animation-delay:.4s">JavaScript</span>
-      <span class="badge float" style="animation-delay:.6s">React</span>
-      <span class="badge float" style="animation-delay:.8s">HTML/CSS</span>
-      <span class="badge float" style="animation-delay:1s" data-i18n="skills.cloud">Cloud</span>
-      <span class="badge float" style="animation-delay:1.2s">DevOps</span>
-    </div>
-  </section>
 
-  <!-- Solutions -->
-  <section id="solutions" class="py-20 bg-white/70 dark:bg-gray-900/70 backdrop-blur">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 data-i18n="solutions.title" class="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">Solutions That Scale</h2>
-        <p data-i18n="solutions.subtitle" class="text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">Custom-built solutions designed to solve real business problems</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <article class="card group">
-          <div class="feature-icon">📚</div>
-          <h3 data-i18n="solutions.s1.title" class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Time Tracking for Students</h3>
-          <p data-i18n="solutions.s1.desc" class="text-gray-700 dark:text-gray-300">Plan, track, and reflect with clean dashboards and analytics.</p>
-        </article>
-        <article class="card group">
-          <div class="feature-icon">🛍️</div>
-          <h3 data-i18n="solutions.s2.title" class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Digitalflohmarkt</h3>
-          <p data-i18n="solutions.s2.desc" class="text-gray-700 dark:text-gray-300">Marketplace with listings, chat, and secure checkout flows.</p>
-        </article>
-        <article class="card group">
-          <div class="feature-icon">👥</div>
-          <h3 data-i18n="solutions.s3.title" class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">TeamworkFeedback</h3>
-          <p data-i18n="solutions.s3.desc" class="text-gray-700 dark:text-gray-300">Pulse surveys, action items, and team analytics.</p>
-        </article>
-        <article class="card group">
-          <div class="feature-icon">🤖</div>
-          <h3 data-i18n="solutions.s4.title" class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">AI HotelFoodMonitoring</h3>
-          <p data-i18n="solutions.s4.desc" class="text-gray-700 dark:text-gray-300">AI insights to reduce waste and improve quality.</p>
-        </article>
-      </div>
-    </div>
-  </section>
+  <!-- BACK TO TOP BUTTON -->
+  <button
+    id="backToTopBtn"
+    class="fixed bottom-6 right-6 z-40 rounded-full w-10 h-10 flex items-center justify-center bg-blue-600 text-white shadow-lg hover:bg-blue-700 transition"
+    aria-label="Back to top"
+  >
+    ↑
+  </button>
 
-  <!-- Key Features -->
-  <section id="features" class="py-20">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 data-i18n="features.title" class="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">Why Choose mzdTech?</h2>
-        <p data-i18n="features.subtitle" class="text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">Technical excellence meets business understanding</p>
+  <!-- WELCOME PAGE -->
+  <div id="welcomePage" class="welcome-page min-h-screen flex flex-col items-center justify-center px-6 relative">
+
+    <div class="relative z-10 text-center max-w-6xl w-full">
+      <!-- Logo -->
+      <div class="logo-animate mb-10">
+        <img src="mzdtech-logo.png" alt="mzdTech" class="w-32 h-32 md:w-48 md:h-48 mx-auto mb-6 drop-shadow-2xl"/>
+        <h1 id="homeTitle" class="text-5xl md:text-7xl font-extrabold mb-4">
+          mzd<span class="text-blue-600 dark:text-blue-400">Tech</span>
+        </h1>
+        <p id="homeSubtitle" class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-4">
+          Connecting People with Technology
+        </p>
       </div>
-      <div class="grid md:grid-cols-3 gap-8">
+
+      <!-- Stats -->
+      <div class="grid sm:grid-cols-3 gap-4 max-w-3xl mx-auto mb-12">
         <div class="card text-center">
-          <div class="feature-icon mx-auto">⚡</div>
-          <h3 data-i18n="features.f1.title" class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">Lightning Fast</h3>
-          <p data-i18n="features.f1.desc" class="text-gray-700 dark:text-gray-300">Optimized code and modern infrastructure ensure top performance</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400" id="statsExperienceLabel">Years of experience</p>
+          <p class="text-3xl font-extrabold">
+            <span class="stat-counter" data-target="5">0</span>+
+          </p>
         </div>
         <div class="card text-center">
-          <div class="feature-icon mx-auto">🔒</div>
-          <h3 data-i18n="features.f2.title" class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">Secure by Design</h3>
-          <p data-i18n="features.f2.desc" class="text-gray-700 dark:text-gray-300">Security best practices integrated from day one</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400" id="statsProjectsLabel">Projects delivered</p>
+          <p class="text-3xl font-extrabold">
+            <span class="stat-counter" data-target="20">0</span>+
+          </p>
         </div>
         <div class="card text-center">
-          <div class="feature-icon mx-auto">📱</div>
-          <h3 data-i18n="features.f3.title" class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">Responsive</h3>
-          <p data-i18n="features.f3.desc" class="text-gray-700 dark:text-gray-300">Perfect experience across all devices and screen sizes</p>
-        </div>
-        <div class="card text-center">
-          <div class="feature-icon mx-auto">☁️</div>
-          <h3 data-i18n="features.f4.title" class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">Cloud Native</h3>
-          <p data-i18n="features.f4.desc" class="text-gray-700 dark:text-gray-300">Scalable cloud architecture built for growth</p>
-        </div>
-        <div class="card text-center">
-          <div class="feature-icon mx-auto">🎨</div>
-          <h3 data-i18n="features.f5.title" class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">Modern Design</h3>
-          <p data-i18n="features.f5.desc" class="text-gray-700 dark:text-gray-300">Beautiful interfaces that users love to interact with</p>
-        </div>
-        <div class="card text-center">
-          <div class="feature-icon mx-auto">🤝</div>
-          <h3 data-i18n="features.f6.title" class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">Clear Communication</h3>
-          <p data-i18n="features.f6.desc" class="text-gray-700 dark:text-gray-300">Regular updates and transparent collaboration</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400" id="statsStudentsLabel">Students taught</p>
+          <p class="text-3xl font-extrabold">
+            <span class="stat-counter" data-target="50">0</span>+
+          </p>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Process -->
-  <section id="process" class="py-20 bg-white/70 dark:bg-gray-900/70 backdrop-blur">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 data-i18n="process.title" class="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">How We Work</h2>
-        <p data-i18n="process.subtitle" class="text-xl text-gray-700 dark:text-gray-300">A proven process for successful projects</p>
-      </div>
-      <div class="space-y-8">
-        <div class="timeline-item card">
-          <h3 class="text-2xl font-bold mb-2 text-gray-900 dark:text-white" data-i18n="process.p1.title">1. Discovery</h3>
-          <p class="text-gray-700 dark:text-gray-300" data-i18n="process.p1.desc">Understanding your needs, goals, and technical requirements through in-depth consultation.</p>
-        </div>
-        <div class="timeline-item card">
-          <h3 class="text-2xl font-bold mb-2 text-gray-900 dark:text-white" data-i18n="process.p2.title">2. Planning</h3>
-          <p class="text-gray-700 dark:text-gray-300" data-i18n="process.p2.desc">Creating detailed proposals, timelines, and technical specifications for your approval.</p>
-        </div>
-        <div class="timeline-item card">
-          <h3 class="text-2xl font-bold mb-2 text-gray-900 dark:text-white" data-i18n="process.p3.title">3. Development</h3>
-          <p class="text-gray-700 dark:text-gray-300" data-i18n="process.p3.desc">Agile development with regular demos and feedback loops to ensure we're on track.</p>
-        </div>
-        <div class="timeline-item card">
-          <h3 class="text-2xl font-bold mb-2 text-gray-900 dark:text-white" data-i18n="process.p4.title">4. Testing</h3>
-          <p class="text-gray-700 dark:text-gray-300" data-i18n="process.p4.desc">Comprehensive testing across devices, browsers, and real-world scenarios.</p>
-        </div>
-        <div class="timeline-item card">
-          <h3 class="text-2xl font-bold mb-2 text-gray-900 dark:text-white" data-i18n="process.p5.title">5. Launch & Support</h3>
-          <p class="text-gray-700 dark:text-gray-300" data-i18n="process.p5.desc">Smooth deployment and ongoing support to ensure your success.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+      <!-- Three Main Sections -->
+      <div class="grid md:grid-cols-3 gap-8 mb-10">
+        <button onclick="showSection('service')" class="section-btn" style="background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);">
+          <div class="text-5xl mb-4">🚀</div>
+          <h2 id="homeServicesTitle" class="text-2xl md:text-3xl font-bold mb-3">Services</h2>
+          <p id="homeServicesText" class="text-base md:text-lg">Professional IT Solutions & Consulting</p>
+        </button>
 
-  <!-- Portfolio -->
-  <section id="portfolio" class="py-20">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 data-i18n="portfolio.title" class="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">Recent Work</h2>
-        <p data-i18n="portfolio.subtitle" class="text-xl text-gray-700 dark:text-gray-300">Projects that made an impact</p>
-      </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <figure class="card p-0 overflow-hidden cursor-pointer portfolio-item" data-desc="Landing page for a startup to collect leads.">
-          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80" alt="Landing page" class="w-full h-64 object-cover"/>
-          <figcaption class="p-4">
-            <h3 class="font-semibold text-lg mb-1 text-gray-900 dark:text-white" data-i18n="portfolio.i1.title">Landing Page – Startup</h3>
-            <p class="text-sm text-gray-600 dark:text-gray-400" data-i18n="portfolio.i1.desc">Modern landing page with lead capture</p>
-          </figcaption>
-        </figure>
-        <figure class="card p-0 overflow-hidden cursor-pointer portfolio-item" data-desc="Analytics dashboard with charts and filters.">
-          <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=900&q=80" alt="Dashboard" class="w-full h-64 object-cover"/>
-          <figcaption class="p-4">
-            <h3 class="font-semibold text-lg mb-1 text-gray-900 dark:text-white" data-i18n="portfolio.i2.title">Analytics Dashboard</h3>
-            <p class="text-sm text-gray-600 dark:text-gray-400" data-i18n="portfolio.i2.desc">Real-time data visualization</p>
-          </figcaption>
-        </figure>
-        <figure class="card p-0 overflow-hidden cursor-pointer portfolio-item" data-desc="Cloud setup for a small business app.">
-          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&q=80" alt="Cloud" class="w-full h-64 object-cover"/>
-          <figcaption class="p-4">
-            <h3 class="font-semibold text-lg mb-1 text-gray-900 dark:text-white" data-i18n="portfolio.i3.title">Cloud Setup – SME</h3>
-            <p class="text-sm text-gray-600 dark:text-gray-400" data-i18n="portfolio.i3.desc">Scalable infrastructure deployment</p>
-          </figcaption>
-        </figure>
-      </div>
-      <div class="lightbox" id="lightbox"><img alt="Preview" id="lightboxImg" src=""/></div>
-    </div>
-  </section>
+        <button onclick="showSection('solutions')" class="section-btn" style="background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);">
+          <div class="text-5xl mb-4">💡</div>
+          <h2 id="homeSolutionsTitle" class="text-2xl md:text-3xl font-bold mb-3">Solutions</h2>
+          <p id="homeSolutionsText" class="text-base md:text-lg">Innovative Apps & Web Platforms</p>
+        </button>
 
-  <!-- Testimonials -->
-  <section id="testimonials" class="py-20 bg-white/70 dark:bg-gray-900/70 backdrop-blur">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 data-i18n="testimonials.title" class="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">Client Testimonials</h2>
-        <p data-i18n="testimonials.subtitle" class="text-xl text-gray-700 dark:text-gray-300">What our clients say about working with us</p>
+        <button onclick="showSection('education')" class="section-btn" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+          <div class="text-5xl mb-4">📚</div>
+          <h2 id="homeEducationTitle" class="text-2xl md:text-3xl font-bold mb-3">Education</h2>
+          <p id="homeEducationText" class="text-base md:text-lg">Learn Programming from Scratch</p>
+        </button>
       </div>
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="card">
-          <p class="text-lg mb-4 text-gray-800 dark:text-gray-200" data-i18n="testimonials.t1.text">"mzdTech modernized our website in days. Clear communication and on‑time delivery."</p>
-          <div class="flex items-center gap-3">
-            <img src="https://i.pravatar.cc/80?img=1" alt="Avatar" class="w-12 h-12 rounded-full"/>
+
+      <!-- CEO Introduction -->
+      <button onclick="showSection('about')" class="ceo-card max-w-4xl mx-auto cursor-pointer hover:shadow-2xl transition-all">
+        <div class="flex flex-col md:flex-row items-center gap-6">
+          <img src="selfPhoto.jpg" alt="Elias Mawlawyzada" class="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white shadow-xl object-cover" style="object-position:center 20%;"/>
+          <div class="text-left">
+            <h3 id="homeCEOName" class="text-2xl md:text-3xl font-bold mb-2">Elias Mawlawyzada</h3>
+            <p id="homeCEORole" class="text-lg md:text-xl mb-3 text-blue-200">CEO & Founder of mzdTech</p>
+            <p id="homeCEOText" class="text-base md:text-lg opacity-90">
+              Software Engineer with international experience, passionate about creating innovative digital solutions and educating the next generation of developers.
+            </p>
+            <p id="homeCEOCTA" class="text-xs md:text-sm mt-3 text-blue-200">Click to learn more →</p>
+          </div>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <!-- SERVICE SECTION -->
+  <div id="servicePage" class="hidden min-h-screen">
+    <!-- Header -->
+   <header class="sticky top-0 z-40 bg-gray-900/95 backdrop-blur border-b border-gray-700">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+	<button
+  onclick="showWelcome()"
+  class="flex items-center gap-2"
+>
+  <!-- Logo wrapper -->
+  <span class="w-20 h-20 rounded-full overflow-hidden bg-transparent flex items-center justify-center">
+    <!-- Light-mode logo -->
+    <img
+      src="mzdTech-logo.png"
+      alt="mzdTech logo"
+      class="w-20 h-20 object-contain block dark:hidden"
+    />
+    <!-- Dark-mode logo -->
+    <img
+      src="mzdTech-logoDark.png"
+      alt="mzdTech logo dark"
+      class="w-20 h-20 object-contain hidden dark:block"
+    />
+  </span>
+
+  <!-- Brand text to the RIGHT of the logo -->
+  <span class="text-2xl font-bold leading-none">
+    mzd<span class="text-blue-400">Tech</span>
+  </span>
+</button>
+
+
+
+    <nav class="hidden md:flex gap-6 text-sm">
+      <a href="#services" class="hover:text-blue-400 service-nav-link">Services</a>
+      <a href="#pricing" class="hover:text-blue-400 service-nav-link">Pricing</a>
+      <a href="#process" class="hover:text-blue-400 service-nav-link">Process</a>
+      <a href="#faq" class="hover:text-blue-400 service-nav-link">FAQ</a>
+      <a href="#contact" class="hover:text-blue-400 service-nav-link">Contact</a>
+    </nav>
+
+    <!-- Wizard button shifted LEFT so it doesn't sit under the dark-mode button -->
+    <div class="flex gap-2 mr-24 md:mr-40">
+      <button onclick="openWizard()" class="hidden md:inline-flex btn btn-outline text-xs md:text-sm">
+        Project Wizard
+      </button>
+    </div>
+  </div>
+</header>
+
+
+    <div class="page-transition">
+      <!-- Hero -->
+      <section id="servicesHero" class="py-16 md:py-20 px-6 bg-gradient-to-br from-blue-900 to-purple-900">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <h1 id="servicesHeroTitle" class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4">Professional IT Services</h1>
+            <p id="servicesHeroSubtitle" class="text-lg md:text-2xl mb-6 text-gray-200">From web design to cloud and automation.</p>
+            <div class="flex gap-4 flex-wrap mb-4">
+              <a href="#pricing" class="btn btn-primary text-sm">View Pricing</a>
+              <a href="#contact" class="btn btn-outline text-sm">Get Started</a>
+            </div>
             <div>
-              <p class="font-semibold text-gray-900 dark:text-white">Sara K.</p>
-              <p class="text-sm text-gray-600 dark:text-gray-400" data-i18n="testimonials.t1.role">Café Owner</p>
+              <p class="text-sm text-gray-300 mb-2">Prefer to talk?</p>
+              <a href="#contact" class="inline-flex items-center gap-2 text-sm text-blue-200 underline">
+                Book a free 15 min call →
+              </a>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div class="card">
+              <p class="font-semibold mb-1">Small Business Websites</p>
+              <p class="text-gray-600 dark:text-gray-300">Launch a clean, fast website in days – not months.</p>
+            </div>
+            <div class="card">
+              <p class="font-semibold mb-1">Product Prototypes</p>
+              <p class="text-gray-600 dark:text-gray-300">Clickable prototypes to validate your idea and pitch investors.</p>
+            </div>
+            <div class="card">
+              <p class="font-semibold mb-1">Cloud Setup</p>
+              <p class="text-gray-600 dark:text-gray-300">Deploy to scalable, secure infrastructure with backups.</p>
+            </div>
+            <div class="card">
+              <p class="font-semibold mb-1">Automation</p>
+              <p class="text-gray-600 dark:text-gray-300">Automate reports, notifications and workflows to save time.</p>
             </div>
           </div>
         </div>
-        <div class="card">
-          <p class="text-lg mb-4 text-gray-800 dark:text-gray-200" data-i18n="testimonials.t2.text">"Our prototype helped us validate the idea with clients—great UX and speed."</p>
-          <div class="flex items-center gap-3">
-            <img src="https://i.pravatar.cc/80?img=5" alt="Avatar" class="w-12 h-12 rounded-full"/>
-            <div>
-              <p class="font-semibold text-gray-900 dark:text-white">Jonas R.</p>
-              <p class="text-sm text-gray-600 dark:text-gray-400" data-i18n="testimonials.t2.role">Startup Founder</p>
+      </section>
+
+      <!-- Services -->
+      <section id="services" class="py-16 px-6 bg-gray-900">
+        <div class="max-w-7xl mx-auto">
+          <h2 id="servicesTitle" class="text-3xl md:text-4xl font-bold mb-10 text-center">What We Offer</h2>
+          <div class="grid md:grid-cols-3 gap-8">
+            <div class="card">
+              <div class="text-4xl mb-3">⚡</div>
+              <h3 class="text-xl font-bold mb-2">Web Development</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-3">
+                Modern, responsive websites that convert visitors into customers.
+              </p>
+              <ul class="text-sm text-gray-500 dark:text-gray-400 space-y-1 mb-3">
+                <li>• Landing pages</li>
+                <li>• Portfolio / business websites</li>
+                <li>• Basic SEO setup</li>
+              </ul>
+              <button onclick="openWizard('web')" class="btn btn-outline w-full text-sm">Plan your website</button>
+            </div>
+            <div class="card">
+              <div class="text-4xl mb-3">☁️</div>
+              <h3 class="text-xl font-bold mb-2">Cloud Solutions</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-3">
+                Scalable infrastructure with automated backups and monitoring.
+              </p>
+              <ul class="text-sm text-gray-500 dark:text-gray-400 space-y-1 mb-3">
+                <li>• Docker & CI/CD pipelines</li>
+                <li>• Monitoring & alerts</li>
+                <li>• Backup strategy</li>
+              </ul>
+              <button onclick="openWizard('cloud')" class="btn btn-outline w-full text-sm">Plan cloud setup</button>
+            </div>
+            <div class="card">
+              <div class="text-4xl mb-3">🎨</div>
+              <h3 class="text-xl font-bold mb-2">Prototyping</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-3">
+                Interactive prototypes to validate your ideas quickly.
+              </p>
+              <ul class="text-sm text-gray-500 dark:text-gray-400 space-y-1 mb-3">
+                <li>• Clickable mockups</li>
+                <li>• User testing sessions</li>
+                <li>• Investor-ready demos</li>
+              </ul>
+              <button onclick="openWizard('prototype')" class="btn btn-outline w-full text-sm">Plan your prototype</button>
             </div>
           </div>
         </div>
-        <div class="card">
-          <p class="text-lg mb-4 text-gray-800 dark:text-gray-200" data-i18n="testimonials.t3.text">"Straightforward cloud setup with backups and monitoring. Highly recommend."</p>
-          <div class="flex items-center gap-3">
-            <img src="https://i.pravatar.cc/80?img=11" alt="Avatar" class="w-12 h-12 rounded-full"/>
-            <div>
-              <p class="font-semibold text-gray-900 dark:text-white">Lea W.</p>
-              <p class="text-sm text-gray-600 dark:text-gray-400" data-i18n="testimonials.t3.role">Operations Lead</p>
+      </section>
+
+      <!-- Pricing -->
+      <section id="pricing" class="py-16 px-6 bg-gray-800">
+        <div class="max-w-6xl mx-auto">
+          <h2 id="pricingTitle" class="text-3xl md:text-4xl font-bold mb-10 text-center">Transparent Pricing</h2>
+          <div class="grid md:grid-cols-3 gap-8">
+            <div class="card">
+              <h3 class="text-2xl font-bold mb-1">Starter</h3>
+              <p class="text-gray-500 mb-4 text-sm">For small businesses</p>
+              <p class="text-4xl font-extrabold mb-4">€299</p>
+              <ul class="space-y-1 mb-4 text-sm">
+                <li>✓ 1-page website</li>
+                <li>✓ Mobile optimized</li>
+                <li>✓ Contact form</li>
+                <li>✓ ~1 week delivery</li>
+              </ul>
+              <button class="btn btn-primary w-full text-sm" onclick="openWizard('web')">Get Started</button>
+            </div>
+            <div class="card ring-4 ring-blue-500 scale-105">
+              <div class="badge mb-3">Most Popular</div>
+              <h3 class="text-2xl font-bold mb-1">Pro</h3>
+              <p class="text-gray-500 mb-4 text-sm">For growing companies</p>
+              <p class="text-4xl font-extrabold mb-4">€799</p>
+              <ul class="space-y-1 mb-4 text-sm">
+                <li>✓ Web app prototype</li>
+                <li>✓ 3 core screens</li>
+                <li>✓ Interactive demo</li>
+                <li>✓ 2–3 weeks delivery</li>
+              </ul>
+              <button class="btn btn-primary w-full text-sm" onclick="openWizard('prototype')">Start Now</button>
+            </div>
+            <div class="card">
+              <h3 class="text-2xl font-bold mb-1">Cloud</h3>
+              <p class="text-gray-500 mb-4 text-sm">Production ready</p>
+              <p class="text-4xl font-extrabold mb-4">€599</p>
+              <ul class="space-y-1 mb-4 text-sm">
+                <li>✓ App deployment</li>
+                <li>✓ Automated backups</li>
+                <li>✓ Monitoring & alerts</li>
+                <li>✓ ~2 weeks setup</li>
+              </ul>
+              <button class="btn btn-primary w-full text-sm" onclick="openWizard('cloud')">Setup Cloud</button>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <!-- Case Studies -->
-  <section id="cases" class="py-20">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 data-i18n="cases.title" class="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">Success Stories</h2>
-        <p data-i18n="cases.subtitle" class="text-xl text-gray-700 dark:text-gray-300">Real results for real businesses</p>
-      </div>
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="card">
-          <h3 class="font-bold text-2xl mb-3 text-gray-900 dark:text-white" data-i18n="cases.c1.title">Café Online Presence</h3>
-          <p class="mb-4 text-gray-700 dark:text-gray-300" data-i18n="cases.c1.body"><strong>Problem:</strong> No online visibility<br><strong>Solution:</strong> 1‑page site + menu<br><strong>Result:</strong> +35% reservations in 2 months</p>
-          <img class="feature-img" src="https://images.unsplash.com/photo-1493770348161-369560ae357d?w=900&q=80" alt="Café"/>
-        </div>
-        <div class="card">
-          <h3 class="font-bold text-2xl mb-3 text-gray-900 dark:text-white" data-i18n="cases.c2.title">Startup Lead Gen</h3>
-          <p class="mb-4 text-gray-700 dark:text-gray-300" data-i18n="cases.c2.body"><strong>Problem:</strong> Low conversions<br><strong>Solution:</strong> Landing page A/B tests<br><strong>Result:</strong> +2.1× leads in first month</p>
-          <img class="feature-img" src="https://images.unsplash.com/photo-1557838923-2985c318be48?w=900&q=80" alt="Startup"/>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pricing -->
-  <section id="pricing" class="py-20 bg-white/70 dark:bg-gray-900/70 backdrop-blur">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 data-i18n="pricing.title" class="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">Transparent Pricing</h2>
-        <p data-i18n="pricing.subtitle" class="text-xl text-gray-700 dark:text-gray-300">Simple, clear pricing with no hidden fees</p>
-      </div>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="card">
-          <h3 data-i18n="pricing.p1.title" class="text-2xl font-bold mb-2 text-gray-900 dark:text-white">Starter</h3>
-          <p data-i18n="pricing.p1.desc" class="text-gray-600 dark:text-gray-400 mb-4">Perfect for small businesses</p>
-          <p class="text-5xl font-extrabold mb-6 text-gray-900 dark:text-white">€299</p>
-          <ul class="space-y-3 mb-6 text-gray-700 dark:text-gray-300">
-            <li data-i18n="pricing.p1.l1">✓ 1-page responsive website</li>
-            <li data-i18n="pricing.p1.l2">✓ Contact form integration</li>
-            <li data-i18n="pricing.p1.l3">✓ Mobile optimized</li>
-            <li data-i18n="pricing.p1.l4">✓ ~1 week delivery</li>
-          </ul>
-          <a data-i18n="pricing.p1.cta" href="#contact" class="btn btn-primary w-full justify-center">Get Started</a>
-        </div>
-        <div class="card ring-4 ring-blue-600 dark:ring-blue-400 scale-105">
-          <div class="badge mb-4" data-i18n="pricing.popular">Most Popular</div>
-          <h3 data-i18n="pricing.p2.title" class="text-2xl font-bold mb-2 text-gray-900 dark:text-white">Pro</h3>
-          <p data-i18n="pricing.p2.desc" class="text-gray-600 dark:text-gray-400 mb-4">For growing companies</p>
-          <p class="text-5xl font-extrabold mb-6 text-gray-900 dark:text-white">€799</p>
-          <ul class="space-y-3 mb-6 text-gray-700 dark:text-gray-300">
-            <li data-i18n="pricing.p2.l1">✓ Web app prototype</li>
-            <li data-i18n="pricing.p2.l2">✓ 3 core screens/flows</li>
-            <li data-i18n="pricing.p2.l3">✓ Interactive & clickable</li>
-            <li data-i18n="pricing.p2.l4">✓ 2–3 weeks delivery</li>
-          </ul>
-          <a data-i18n="pricing.p2.cta" href="#contact" class="btn btn-primary w-full justify-center">Start Prototype</a>
-        </div>
-        <div class="card">
-          <h3 data-i18n="pricing.p3.title" class="text-2xl font-bold mb-2 text-gray-900 dark:text-white">Cloud</h3>
-          <p data-i18n="pricing.p3.desc" class="text-gray-600 dark:text-gray-400 mb-4">Production-ready infrastructure</p>
-          <p class="text-5xl font-extrabold mb-6 text-gray-900 dark:text-white">€599</p>
-          <ul class="space-y-3 mb-6 text-gray-700 dark:text-gray-300">
-            <li data-i18n="pricing.p3.l1">✓ App deployment</li>
-            <li data-i18n="pricing.p3.l2">✓ Automated backups</li>
-            <li data-i18n="pricing.p3.l3">✓ Monitoring & alerts</li>
-            <li data-i18n="pricing.p3.l4">✓ ~2 weeks setup</li>
-          </ul>
-          <a data-i18n="pricing.p3.cta" href="#contact" class="btn btn-primary w-full justify-center">Setup Cloud</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq" class="py-20">
-    <div class="max-w-5xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 data-i18n="faq.title" class="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">Frequently Asked Questions</h2>
-        <p data-i18n="faq.subtitle" class="text-xl text-gray-700 dark:text-gray-300">Everything you need to know</p>
-      </div>
-      <div class="card mb-8">
-        <label class="block text-sm font-semibold mb-3 text-gray-900 dark:text-white" data-i18n="faq.ask">Ask AI anything about pricing, timeline, or tech</label>
-        <div class="flex gap-2 flex-col sm:flex-row">
-          <input id="faqQuery" data-i18n-placeholder="faq.placeholder" class="flex-1 px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:border-blue-500 focus:outline-none" placeholder="Type your question…" />
-          <button id="faqAsk" class="btn btn-primary" data-i18n="faq.button">Ask AI</button>
-        </div>
-        <p id="faqAiAnswer" class="mt-4 text-gray-800 dark:text-gray-200 text-sm"></p>
-      </div>
-      <div class="space-y-4">
-        <details class="card">
-          <summary class="cursor-pointer text-lg font-semibold text-gray-900 dark:text-white" data-i18n="faq.q1">How quickly can we start?</summary>
-          <p class="mt-3 text-gray-700 dark:text-gray-300" data-i18n="faq.a1">Usually within a week. For urgent projects, I'll try to accommodate faster timelines.</p>
-        </details>
-        <details class="card">
-          <summary class="cursor-pointer text-lg font-semibold text-gray-900 dark:text-white" data-i18n="faq.q2">What tech stack do you use?</summary>
-          <p class="mt-3 text-gray-700 dark:text-gray-300" data-i18n="faq.a2">HTML/CSS/JS for sites; React or Vanilla for prototypes; AWS/Azure/GCP for cloud infrastructure.</p>
-        </details>
-        <details class="card">
-          <summary class="cursor-pointer text-lg font-semibold text-gray-900 dark:text-white" data-i18n="faq.q3">Do you offer maintenance?</summary>
-          <p class="mt-3 text-gray-700 dark:text-gray-300" data-i18n="faq.a3">Yes—monthly maintenance plans include backups, updates, security patches, and monitoring.</p>
-        </details>
-        <details class="card">
-          <summary class="cursor-pointer text-lg font-semibold text-gray-900 dark:text-white" data-i18n="faq.q4">What if I need changes after launch?</summary>
-          <p class="mt-3 text-gray-700 dark:text-gray-300" data-i18n="faq.a4">I offer flexible support packages for post-launch updates and enhancements.</p>
-        </details>
-      </div>
-    </div>
-<section id="about" class="py-20 bg-white dark:bg-gray-950">
-  <div class="max-w-7xl mx-auto px-6">
-    <!-- About Elias + mzdTech -->
-    <div class="grid md:grid-cols-2 gap-12 items-start mb-20">
-      <!-- Left: Photo & basic info -->
-      <div class="text-center">
-        <img src="selfPhoto.jpg" alt="Elias Mawlawyzada"
-             class="rounded-2xl shadow-2xl w-full max-w-md mx-auto h-auto object-cover" />
-        <div class="mt-6">
-          <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Elias Mawlawyzada</h3>
-          <p class="text-base text-gray-600 dark:text-gray-400 font-medium mt-2">
-            CEO of mzdTech
-          </p>
-          <div class="flex gap-4 justify-center mt-6">
-            <a href="EliasCV.pdf" class="btn btn-outline">Download CV</a>
-            <a href="mailto:eliasmawlawyzada@gmail.com" class="btn btn-primary">Get in Touch</a>
+      <!-- Process -->
+      <section id="process" class="py-16 px-6 bg-gray-900">
+        <div class="max-w-6xl mx-auto">
+          <h2 id="processTitle" class="text-3xl md:text-4xl font-bold mb-10 text-center">How We Work</h2>
+          <div class="grid md:grid-cols-3 gap-8">
+            <div class="card">
+              <h3 class="text-xl font-bold mb-2">1. Discover</h3>
+              <p class="text-sm text-gray-600 dark:text-gray-300">We analyze your needs, target group and goals in a focused workshop.</p>
+            </div>
+            <div class="card">
+              <h3 class="text-xl font-bold mb-2">2. Design & Build</h3>
+              <p class="text-sm text-gray-600 dark:text-gray-300">We design and implement a modern solution with short feedback cycles.</p>
+            </div>
+            <div class="card">
+              <h3 class="text-xl font-bold mb-2">3. Launch & Support</h3>
+              <p class="text-sm text-gray-600 dark:text-gray-300">We deploy, monitor and improve your product together with you.</p>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Right: About Me + mzdTech text -->
-      <div>
-        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">About Me</h2>
-        <div class="space-y-4 text-lg text-gray-800 dark:text-gray-300">
-          <p>
-            I am a software engineer with international experience in creating modern, user-focused
-            digital solutions. I studied Computer Science in Germany and expanded my expertise with
-            professional Software Engineering experience in the Netherlands, building a strong
-            technical foundation with a global perspective.
-          </p>
-          <p>
-            My skills include software development, web design, cloud technologies, and DevOps
-            practices, with hands-on knowledge of Java, C++, JavaScript, React, HTML, and CSS.
-            I enjoy designing clean, scalable systems that solve real problems.
-          </p>
-          <p>
-            Before entering the tech field, I worked for several years as a German–English–Persian
-            interpreter. This background strengthened my communication skills and helps me understand
-            client needs clearly, translate complex requirements, and deliver precise technical
-            solutions.
-          </p>
-          <p>
-            At mzdTech, my goal is to turn ideas into reliable, high-quality digital solutions. I focus
-            on building software and web applications that are efficient, scalable, and tailored to my
-            clients' needs. With a solution-driven and detail-oriented mindset, I aim to deliver
-            technology that creates real value and supports long-term growth.
+      <!-- FAQ -->
+      <section id="faq" class="py-16 px-6 bg-gray-800">
+        <div class="max-w-4xl mx-auto">
+          <h2 id="faqTitle" class="text-3xl md:text-4xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+          <div class="space-y-4 text-sm">
+            <details class="card">
+              <summary class="font-semibold cursor-pointer">How long does a project usually take?</summary>
+              <p class="mt-2 text-gray-600 dark:text-gray-300">Small websites can be ready in about a week. Prototypes and cloud setups typically take 2–3 weeks.</p>
+            </details>
+            <details class="card">
+              <summary class="font-semibold cursor-pointer">How do we communicate?</summary>
+              <p class="mt-2 text-gray-600 dark:text-gray-300">We usually use email and video calls (Zoom/Google Meet). For active projects we can set up a shared chat channel.</p>
+            </details>
+            <details class="card">
+              <summary class="font-semibold cursor-pointer">How does payment work?</summary>
+              <p class="mt-2 text-gray-600 dark:text-gray-300">Projects are usually split into 2–3 milestones. Payments are made after each milestone via bank transfer or Stripe.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials -->
+      <section id="testimonials" class="py-16 px-6 bg-gray-900">
+        <div class="max-w-6xl mx-auto">
+          <h2 id="testimonialsTitle" class="text-3xl md:text-4xl font-bold mb-10 text-center">Client Success Stories</h2>
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="card">
+              <p class="text-sm md:text-base mb-4">"mzdTech delivered our website in days. Excellent communication and clear structure!"</p>
+              <div class="flex items-center gap-3">
+                <img src="https://i.pravatar.cc/80?img=1" alt="Avatar" class="w-10 h-10 rounded-full"/>
+                <div>
+                  <p class="font-bold text-sm">Sara K.</p>
+                  <p class="text-xs text-gray-500">Café Owner</p>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <p class="text-sm md:text-base mb-4">"The prototype helped us secure funding. We could show investors the product instead of just slides."</p>
+              <div class="flex items-center gap-3">
+                <img src="https://i.pravatar.cc/80?img=5" alt="Avatar" class="w-10 h-10 rounded-full"/>
+                <div>
+                  <p class="font-bold text-sm">Jonas R.</p>
+                  <p class="text-xs text-gray-500">Startup Founder</p>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <p class="text-sm md:text-base mb-4">"Cloud setup was seamless. We have monitoring and backups and can sleep better now."</p>
+              <div class="flex items-center gap-3">
+                <img src="https://i.pravatar.cc/80?img=11" alt="Avatar" class="w-10 h-10 rounded-full"/>
+                <div>
+                  <p class="font-bold text-sm">Lea W.</p>
+                  <p class="text-xs text-gray-500">Operations Lead</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="py-16 px-6 bg-gradient-to-br from-blue-900 to-purple-900">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 id="contactTitle" class="text-3xl md:text-4xl font-bold mb-4">Ready to Start Your Project?</h2>
+          <p id="contactSubtitle" class="text-lg md:text-xl mb-8 text-gray-200">Tell us about your idea – you’ll get an honest, no-pressure reply.</p>
+          <div class="card max-w-md mx-auto">
+            <form class="space-y-3">
+              <input id="contactName" type="text" placeholder="Your Name" class="w-full px-4 py-2.5 rounded-lg border bg-white text-gray-900 text-sm" required/>
+              <input id="contactEmail" type="email" placeholder="Your Email" class="w-full px-4 py-2.5 rounded-lg border bg-white text-gray-900 text-sm" required/>
+              <textarea id="contactMessage" rows="4" placeholder="Tell us about your project..." class="w-full px-4 py-2.5 rounded-lg border bg-white text-gray-900 text-sm" required></textarea>
+              <button type="submit" class="btn btn-primary w-full text-sm">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- SOLUTIONS SECTION -->
+  <div id="solutionsPage" class="hidden min-h-screen">
+    <header class="sticky top-0 z-40 bg-gray-900/95 backdrop-blur border-b border-gray-700">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <button
+  onclick="showWelcome()"
+  class="flex items-center gap-2"
+>
+  <!-- Logo wrapper -->
+  <span class="w-20 h-20 rounded-full overflow-hidden bg-transparent flex items-center justify-center">
+    <!-- Light-mode logo -->
+    <img
+      src="mzdTech-logo.png"
+      alt="mzdTech logo"
+      class="w-20 h-20 object-contain block dark:hidden"
+    />
+    <!-- Dark-mode logo -->
+    <img
+      src="mzdTech-logoDark.png"
+      alt="mzdTech logo dark"
+      class="w-20 h-20 object-contain hidden dark:block"
+    />
+  </span>
+
+  <!-- Brand text to the RIGHT of the logo -->
+  <span class="text-2xl font-bold leading-none">
+    mzd<span class="text-blue-400">Tech</span>
+  </span>
+</button>
+        
+      </div>
+    </header>
+
+    <div class="page-transition">
+      <section class="py-16 md:py-20 px-6 bg-gradient-to-br from-purple-900 to-pink-900">
+        <div class="max-w-6xl mx-auto text-center">
+          <h1 id="solutionsHeroTitle" class="text-4xl md:text-6xl font-extrabold mb-4">Our Solutions</h1>
+          <p id="solutionsHeroSubtitle" class="text-lg md:text-2xl mb-6 text-gray-200">Products and platforms built by mzdTech.</p>
+          <p id="solutionsHeroText" class="text-sm md:text-base text-gray-200 max-w-3xl mx-auto">
+            From student productivity tools to AI-assisted hotel food monitoring, we build software that solves real-world problems and is pleasant to use.
           </p>
         </div>
+      </section>
+
+      <section id="solutionsList" class="py-16 px-6 bg-gray-900">
+        <div class="max-w-7xl mx-auto">
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Each card has a "View Case Study" button -->
+            <div class="card">
+              <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&h=400&fit=crop" alt="Time Tracking" class="w-full h-40 object-cover rounded-lg mb-4"/>
+              <h3 class="text-xl font-bold mb-2">Time Tracking for Students</h3>
+              <p class="mb-3 text-sm text-gray-600 dark:text-gray-300">Plan, track, and reflect with clean dashboards and analytics.</p>
+              <div class="flex gap-2 flex-wrap mb-3">
+                <span class="badge">React</span>
+                <span class="badge">Node.js</span>
+                <span class="badge">MongoDB</span>
+              </div>
+              <div class="flex gap-2">
+                <button class="btn btn-primary flex-1 text-sm" onclick="openCaseStudy('students')">View Case Study</button>
+                <button class="btn btn-outline flex-1 text-sm" onclick="showSection('service')">Start Similar Project</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=600&h=400&fit=crop" alt="Marketplace" class="w-full h-40 object-cover rounded-lg mb-4"/>
+              <h3 class="text-xl font-bold mb-2">Digitalflohmarkt</h3>
+              <p class="mb-3 text-sm text-gray-600 dark:text-gray-300">Online marketplace with chat and secure checkout.</p>
+              <div class="flex gap-2 flex-wrap mb-3">
+                <span class="badge">Vue.js</span>
+                <span class="badge">Firebase</span>
+                <span class="badge">Stripe</span>
+              </div>
+              <div class="flex gap-2">
+                <button class="btn btn-primary flex-1 text-sm" onclick="openCaseStudy('marketplace')">View Case Study</button>
+                <button class="btn btn-outline flex-1 text-sm" onclick="showSection('service')">Build a Marketplace</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop" alt="Feedback" class="w-full h-40 object-cover rounded-lg mb-4"/>
+              <h3 class="text-xl font-bold mb-2">TeamworkFeedback</h3>
+              <p class="mb-3 text-sm text-gray-600 dark:text-gray-300">Team pulse surveys and actionable analytics.</p>
+              <div class="flex gap-2 flex-wrap mb-3">
+                <span class="badge">React</span>
+                <span class="badge">PostgreSQL</span>
+                <span class="badge">Docker</span>
+              </div>
+              <div class="flex gap-2">
+                <button class="btn btn-primary flex-1 text-sm" onclick="openCaseStudy('feedback')">View Case Study</button>
+                <button class="btn btn-outline flex-1 text-sm" onclick="showSection('service')">Build Internal Tool</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&h=400&fit=crop" alt="AI Monitoring" class="w-full h-40 object-cover rounded-lg mb-4"/>
+              <h3 class="text-xl font-bold mb-2">AI HotelFoodMonitoring</h3>
+              <p class="mb-3 text-sm text-gray-600 dark:text-gray-300">AI-powered insights to reduce food waste in hotels.</p>
+              <div class="flex gap-2 flex-wrap mb-3">
+                <span class="badge">Python</span>
+                <span class="badge">TensorFlow</span>
+                <span class="badge">AWS</span>
+              </div>
+              <div class="flex gap-2">
+                <button class="btn btn-primary flex-1 text-sm" onclick="openCaseStudy('hotel')">View Case Study</button>
+                <button class="btn btn-outline flex-1 text-sm" onclick="showSection('service')">Discuss AI Project</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Web App" class="w-full h-40 object-cover rounded-lg mb-4"/>
+              <h3 class="text-xl font-bold mb-2">Custom Web Applications</h3>
+              <p class="mb-3 text-sm text-gray-600 dark:text-gray-300">Tailored solutions for your specific needs.</p>
+              <div class="flex gap-2 flex-wrap mb-3">
+                <span class="badge">Full Stack</span>
+                <span class="badge">Cloud</span>
+              </div>
+              <div class="flex gap-2">
+                <button class="btn btn-primary flex-1 text-sm" onclick="openCaseStudy('custom')">View Example</button>
+                <button class="btn btn-outline flex-1 text-sm" onclick="showSection('service')">Start a Project</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&h=400&fit=crop" alt="Dashboard" class="w-full h-40 object-cover rounded-lg mb-4"/>
+              <h3 class="text-xl font-bold mb-2">Analytics Dashboards</h3>
+              <p class="mb-3 text-sm text-gray-600 dark:text-gray-300">Real-time data visualization and insights.</p>
+              <div class="flex gap-2 flex-wrap mb-3">
+                <span class="badge">D3.js</span>
+                <span class="badge">API</span>
+              </div>
+              <div class="flex gap-2">
+                <button class="btn btn-primary flex-1 text-sm" onclick="openCaseStudy('analytics')">View Example</button>
+                <button class="btn btn-outline flex-1 text-sm" onclick="showSection('service')">Discuss Dashboard</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How We Build -->
+      <section class="py-16 px-6 bg-gray-800">
+        <div class="max-w-6xl mx-auto text-center">
+          <h2 id="solutionsHowTitle" class="text-3xl md:text-4xl font-bold mb-8">How We Build Products</h2>
+          <div class="grid md:grid-cols-3 gap-8 text-left mb-8">
+            <div class="card">
+              <h3 class="text-xl font-bold mb-2">User Research</h3>
+              <p class="text-sm">We design with your real users in mind and validate ideas early with quick tests.</p>
+            </div>
+            <div class="card">
+              <h3 class="text-xl font-bold mb-2">Rapid Prototyping</h3>
+              <p class="text-sm">Interactive demos help you get stakeholder and investor buy-in before full development.</p>
+            </div>
+            <div class="card">
+              <h3 class="text-xl font-bold mb-2">Scalable Architecture</h3>
+              <p class="text-sm">We choose technologies that can grow with your business without painful rewrites.</p>
+            </div>
+          </div>
+          <button onclick="showSection('service')" class="btn btn-primary text-sm">Talk About Your Idea</button>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EDUCATION SECTION -->
+  <div id="educationPage" class="hidden min-h-screen">
+    <header class="sticky top-0 z-40 bg-gray-900/95 backdrop-blur border-b border-gray-700">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <button
+  onclick="showWelcome()"
+  class="flex items-center gap-2"
+>
+  <!-- Logo wrapper -->
+  <span class="w-20 h-20 rounded-full overflow-hidden bg-transparent flex items-center justify-center">
+    <!-- Light-mode logo -->
+    <img
+      src="mzdTech-logo.png"
+      alt="mzdTech logo"
+      class="w-20 h-20 object-contain block dark:hidden"
+    />
+    <!-- Dark-mode logo -->
+    <img
+      src="mzdTech-logoDark.png"
+      alt="mzdTech logo dark"
+      class="w-20 h-20 object-contain hidden dark:block"
+    />
+  </span>
+
+  <!-- Brand text to the RIGHT of the logo -->
+  <span class="text-2xl font-bold leading-none">
+    mzd<span class="text-blue-400">Tech</span>
+  </span>
+</button>
+        <nav class="hidden md:flex gap-2 text-sm">
+          <button data-lang-btn="java" onclick="setEducationLang('java')" class="px-3 py-1 rounded-full bg-blue-600 text-white">Java</button>
+          <button data-lang-btn="cpp" onclick="setEducationLang('cpp')" class="px-3 py-1 rounded-full bg-gray-800 text-gray-300">C++</button>
+          <button data-lang-btn="python" onclick="setEducationLang('python')" class="px-3 py-1 rounded-full bg-gray-800 text-gray-300">Python</button>
+          <button data-lang-btn="javascript" onclick="setEducationLang('javascript')" class="px-3 py-1 rounded-full bg-gray-800 text-gray-300">JavaScript</button>
+          <button data-lang-btn="web" onclick="setEducationLang('web')" class="px-3 py-1 rounded-full bg-gray-800 text-gray-300">HTML/CSS</button>
+        </nav>
+ <button
+  class="btn btn-outline text-xs md:text-sm opacity-0 pointer-events-none select-none"
+>
+  ← Home
+</button>
+      </div>
+    </header>
+
+    <div class="page-transition">
+      <section id="educationHeroTop" class="py-16 md:py-20 px-6 bg-gradient-to-br from-green-900 to-teal-900">
+        <div class="max-w-6xl mx-auto text-center">
+          <h1 id="eduHeroTitle" class="text-4xl md:text-6xl font-extrabold mb-4">Learn Programming</h1>
+          <p id="eduHeroSubtitle" class="text-lg md:text-2xl mb-6 text-gray-200">Master coding from scratch with guidance from an experienced engineer.</p>
+          <p id="eduHeroText" class="text-sm md:text-base text-gray-200 max-w-4xl mx-auto mb-4">
+            Choose a language above – each path includes curated YouTube content, clear pricing and an “Enroll Now” button. You can optionally add 1:1 mentoring.
+          </p>
+        </div>
+      </section>
+
+      <!-- Java -->
+      <section id="java" class="edu-section py-16 px-6 bg-gray-900">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+            <span class="text-4xl">☕</span> Java Programming
+          </h2>
+          <p class="text-lg mb-8 text-gray-400">Learn object-oriented programming with Java – ideal for backend and Android.</p>
+          <div class="grid md:grid-cols-2 gap-6 mb-10">
+            <div class="card">
+              <h3 class="text-lg font-bold mb-3">Java Basics – Getting Started</h3>
+              <div class="video-container mb-4">
+                <iframe src="https://www.youtube.com/embed/eIrMbAQSU34" frameborder="0" allowfullscreen></iframe>
+              </div>
+              <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">Introduction to Java syntax, variables, and data types.</p>
+              <p class="font-semibold text-green-400 mb-3">€49 – Full course access</p>
+              <button class="btn btn-primary w-full text-sm" onclick="openCourseDetails('javaBasics')">Enroll Now</button>
+            </div>
+            <div class="card">
+              <h3 class="text-lg font-bold mb-3">Object-Oriented Programming</h3>
+              <div class="video-container mb-4">
+                <iframe src="https://www.youtube.com/embed/6T_HgnjoYwM" frameborder="0" allowfullscreen></iframe>
+              </div>
+              <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">Classes, objects, inheritance, and polymorphism in practice.</p>
+              <p class="font-semibold text-green-400 mb-3">€59 – OOP bundle</p>
+              <button class="btn btn-primary w-full text-sm" onclick="openCourseDetails('javaOOP')">Enroll Now</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- C++ -->
+      <section id="cpp" class="edu-section hidden py-16 px-6 bg-gray-800">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+            <span class="text-4xl">⚙️</span> C++ Programming
+          </h2>
+          <p class="text-lg mb-8 text-gray-400">Master system programming and performance-critical applications.</p>
+          <div class="grid md:grid-cols-2 gap-6 mb-10">
+            <div class="card">
+              <h3 class="text-lg font-bold mb-3">C++ Fundamentals</h3>
+              <div class="video-container mb-4">
+                <iframe src="https://www.youtube.com/embed/vLnPwxZdW4Y" frameborder="0" allowfullscreen></iframe>
+              </div>
+              <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">Complete C++ tutorial for beginners.</p>
+              <p class="font-semibold text-green-400 mb-3">€49 – Full course access</p>
+              <button class="btn btn-primary w-full text-sm" onclick="openCourseDetails('cppBasics')">Enroll Now</button>
+            </div>
+            <div class="card">
+              <h3 class="text-lg font-bold mb-3">Advanced C++</h3>
+              <div class="video-container mb-4">
+                <iframe src="https://www.youtube.com/embed/8jLOx1hD3_o" frameborder="0" allowfullscreen></iframe>
+              </div>
+              <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">Pointers, memory management, templates and more.</p>
+              <p class="font-semibold text-green-400 mb-3">€59 – Advanced bundle</p>
+              <button class="btn btn-primary w-full text-sm" onclick="openCourseDetails('cppAdvanced')">Enroll Now</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Python -->
+      <section id="python" class="edu-section hidden py-16 px-6 bg-gray-900">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+            <span class="text-4xl">🐍</span> Python Programming
+          </h2>
+          <p class="text-lg mb-8 text-gray-400">Learn the most popular programming language.</p>
+          <div class="grid md:grid-cols-2 gap-6 mb-10">
+            <div class="card">
+              <h3 class="text-lg font-bold mb-3">Python for Beginners</h3>
+              <div class="video-container mb-4">
+                <iframe src="https://www.youtube.com/embed/rfscVS0vtbw" frameborder="0" allowfullscreen></iframe>
+              </div>
+              <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">Complete Python course from scratch.</p>
+              <p class="font-semibold text-green-400 mb-3">€39 – Starter bundle</p>
+              <button class="btn btn-primary w-full text-sm" onclick="openCourseDetails('pyBasics')">Enroll Now</button>
+            </div>
+            <div class="card">
+              <h3 class="text-lg font-bold mb-3">Python Data Science</h3>
+              <div class="video-container mb-4">
+                <iframe src="https://www.youtube.com/embed/_uQrJ0TkZlc" frameborder="0" allowfullscreen></iframe>
+              </div>
+              <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">Python for data analysis and machine learning.</p>
+              <p class="font-semibold text-green-400 mb-3">€69 – Data science bundle</p>
+              <button class="btn btn-primary w-full text-sm" onclick="openCourseDetails('pyData')">Enroll Now</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- JavaScript -->
+      <section id="javascript" class="edu-section hidden py-16 px-6 bg-gray-800">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+            <span class="text-4xl">🟨</span> JavaScript Programming
+          </h2>
+          <p class="text-lg mb-8 text-gray-400">Build interactive websites and applications.</p>
+          <div class="grid md:grid-cols-2 gap-6 mb-10">
+            <div class="card">
+              <h3 class="text-lg font-bold mb-3">JavaScript Basics</h3>
+              <div class="video-container mb-4">
+                <iframe src="https://www.youtube.com/embed/PkZNo7MFNFg" frameborder="0" allowfullscreen></iframe>
+              </div>
+              <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">Learn JavaScript from the ground up.</p>
+              <p class="font-semibold text-green-400 mb-3">€39 – Starter bundle</p>
+              <button class="btn btn-primary w-full text-sm" onclick="openCourseDetails('jsBasics')">Enroll Now</button>
+            </div>
+            <div class="card">
+              <h3 class="text-lg font-bold mb-3">Modern JavaScript ES6+</h3>
+              <div class="video-container mb-4">
+                <iframe src="https://www.youtube.com/embed/NCwa_xi0Uuc" frameborder="0" allowfullscreen></iframe>
+              </div>
+              <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">Arrow functions, promises, async/await.</p>
+              <p class="font-semibold text-green-400 mb-3">€59 – Modern JS course</p>
+              <button class="btn btn-primary w-full text-sm" onclick="openCourseDetails('jsModern')">Enroll Now</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HTML/CSS -->
+      <section id="web" class="edu-section hidden py-16 px-6 bg-gray-900">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+            <span class="text-4xl">🌐</span> HTML & CSS
+          </h2>
+          <p class="text-lg mb-8 text-gray-400">Create beautiful, responsive websites.</p>
+          <div class="grid md:grid-cols-2 gap-6 mb-10">
+            <div class="card">
+              <h3 class="text-lg font-bold mb-3">HTML & CSS Full Course</h3>
+              <div class="video-container mb-4">
+                <iframe src="https://www.youtube.com/embed/G3e-cpL7ofc" frameborder="0" allowfullscreen></iframe>
+              </div>
+              <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">Complete web development fundamentals.</p>
+              <p class="font-semibold text-green-400 mb-3">€39 – Starter bundle</p>
+              <button class="btn btn-primary w-full text-sm" onclick="openCourseDetails('webBasics')">Enroll Now</button>
+            </div>
+            <div class="card">
+              <h3 class="text-lg font-bold mb-3">Responsive Web Design</h3>
+              <div class="video-container mb-4">
+                <iframe src="https://www.youtube.com/embed/srvUrASNj0s" frameborder="0" allowfullscreen></iframe>
+              </div>
+              <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">Build mobile-friendly websites with Flexbox and Grid.</p>
+              <p class="font-semibold text-green-400 mb-3">€49 – Responsive design course</p>
+              <button class="btn btn-primary w-full text-sm" onclick="openCourseDetails('webResponsive')">Enroll Now</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Learning paths + FAQ -->
+      <section class="py-16 px-6 bg-gradient-to-br from-green-900 to-teal-900">
+        <div class="max-w-6xl mx-auto">
+          <h2 id="eduPathsTitle" class="text-3xl md:text-4xl font-bold mb-6 text-center">Recommended Learning Paths</h2>
+          <div class="grid md:grid-cols-2 gap-6 mb-10">
+            <div class="card">
+              <h3 class="text-xl font-bold mb-2">Web Developer Path</h3>
+              <p class="text-sm mb-2 text-gray-600 dark:text-gray-300">Perfect if you want to build modern websites and frontends.</p>
+              <ul class="text-sm text-gray-500 dark:text-gray-400 space-y-1 mb-3">
+                <li>1. HTML/CSS Full Course</li>
+                <li>2. JavaScript Basics</li>
+                <li>3. Modern JavaScript ES6+</li>
+                <li>4. Optional: React basics (coming soon)</li>
+              </ul>
+              <button class="btn btn-outline w-full text-sm" onclick="setEducationLang('web')">Start Web Path</button>
+            </div>
+            <div class="card">
+              <h3 class="text-xl font-bold mb-2">Backend / OOP Path</h3>
+              <p class="text-sm mb-2 text-gray-600 dark:text-gray-300">Great if you like logic, APIs and robust systems.</p>
+              <ul class="text-sm text-gray-500 dark:text-gray-400 space-y-1 mb-3">
+                <li>1. Java Basics</li>
+                <li>2. Object-Oriented Programming</li>
+                <li>3. Optional: C++ fundamentals</li>
+                <li>4. Databases & cloud (coming soon)</li>
+              </ul>
+              <button class="btn btn-outline w-full text-sm" onclick="setEducationLang('java')">Start Java Path</button>
+            </div>
+          </div>
+
+          <div class="max-w-4xl mx-auto mb-10">
+            <h3 id="eduFaqTitle" class="text-2xl font-bold mb-4 text-center text-white">Education FAQ</h3>
+            <div class="space-y-3 text-sm">
+              <details class="card">
+                <summary class="font-semibold cursor-pointer">Do I need prior knowledge?</summary>
+                <p class="mt-2 text-gray-600 dark:text-gray-300">No. The beginner courses start from zero and explain everything step by step.</p>
+              </details>
+              <details class="card">
+                <summary class="font-semibold cursor-pointer">Do I get support if I’m stuck?</summary>
+                <p class="mt-2 text-gray-600 dark:text-gray-300">Yes. You can email questions and optionally book 1:1 mentoring sessions.</p>
+              </details>
+              <details class="card">
+                <summary class="font-semibold cursor-pointer">Can I learn while working or studying?</summary>
+                <p class="mt-2 text-gray-600 dark:text-gray-300">Absolutely. All material is available on-demand so you can learn at your own pace.</p>
+              </details>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button onclick="showSection('service')" class="btn btn-primary text-sm">Contact for Mentorship</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ABOUT / FOUNDER SECTION -->
+  <div id="aboutPage" class="hidden">
+    <!-- Hero with background image not badly cropped -->
+    <!-- ABOUT / FOUNDER HERO SECTION -->
+<!-- ABOUT / FOUNDER HERO SECTION -->
+<!-- ABOUT / FOUNDER HERO SECTION -->
+<!-- ABOUT / FOUNDER HERO SECTION -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <!-- Background image -->
+  <div class="absolute inset-0">
+    <img
+      src="selfPhoto.jpg"
+      alt="Elias Mawlawyzada"
+      class="w-full h-full object-cover"
+      style="object-position: center 15%;"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/85"></div>
+  </div>
+
+  <!-- Back Button -->
+  <button
+    onclick="showWelcome()"
+    class="absolute top-6 left-6 z-20 btn btn-outline text-white border-white hover:bg-white hover:text-black text-xs md:text-sm"
+  >
+    ← Home
+  </button>
+
+  <!-- Content -->
+  <!-- pt-32 / md:pt-40 pushes the whole block DOWN into the white circle -->
+  <div class="relative z-10 max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-start px-6 pt-32 md:pt-40">
+
+    <!-- ml-0 / md:ml-4 keeps text close to the left (inside the circle) -->
+    <div class="text-white ml-0 md:ml-4">
+      <h1 id="aboutHeroTitle" class="text-4xl md:text-5xl font-extrabold mb-3 drop-shadow-2xl">
+        Elias Mawlawyzada
+      </h1>
+      <p id="aboutHeroSubtitle" class="text-xl md:text-2xl text-blue-300 font-semibold mb-3 drop-shadow-lg">
+        CEO &amp; Founder of mzdTech
+      </p>
+      <p id="aboutHeroLine" class="text-sm md:text-base text-gray-200 mb-4">
+        Software Engineer · Innovator · Educator
+      </p>
+      <p id="aboutHeroText" class="text-sm md:text-base text-gray-200 mb-6 max-w-xl">
+        I help people and organizations turn ideas into clean, reliable digital products – and I teach others how to build software themselves.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href="EliasCV.pdf" class="btn btn-primary text-xs md:text-sm">Download CV</a>
+        <a
+          href="mailto:eliasmawlawyzada@gmail.com"
+          class="btn btn-outline text-xs md:text-sm text-white border-white hover:bg-white hover:text-black"
+        >
+          Get in Touch
+        </a>
+      </div>
+    </div>
+
+    <!-- Round photo on the right -->
+    <div class="hidden md:flex justify-end">
+      <div class="relative">
+        <div class="absolute -inset-4 bg-blue-500/40 blur-3xl rounded-full"></div>
+        <img
+          src="mzdtech-logo.png"
+          alt="Elias Mawlawyzada"
+          class="relative w-56 h-56 rounded-full border-8 border-white/80 shadow-2xl object-cover"
+          style="object-position: center 20%;"
+        />
       </div>
     </div>
   </div>
 </section>
 
 
-  <!-- Contact -->
-  <section id="contact" class="py-20">
-    <div class="max-w-5xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 data-i18n="contact.title" class="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">Let's Build Something Great</h2>
-        <p data-i18n="contact.subtitle" class="text-xl text-gray-700 dark:text-gray-300">Ready to start your project? Get in touch today.</p>
-      </div>
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="card">
-          <h3 data-i18n="contact.quick" class="text-2xl font-semibold mb-6 text-gray-900 dark:text-white">Quick Contact</h3>
-          <form id="contactForm" class="space-y-4">
-            <input id="name" type="text" data-i18n-placeholder="contact.name" placeholder="Your Name" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:border-blue-500 focus:outline-none" required/>
-            <input id="email" type="email" data-i18n-placeholder="contact.email" placeholder="Your Email" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:border-blue-500 focus:outline-none" required/>
-            <select id="projectType" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:border-blue-500 focus:outline-none">
-              <option data-i18n="contact.opt1">Landing Page</option>
-              <option data-i18n="contact.opt2">Web App Prototype</option>
-              <option data-i18n="contact.opt3">Cloud Setup</option>
-              <option data-i18n="contact.opt4">Custom Project</option>
-            </select>
-            <textarea id="message" rows="4" data-i18n-placeholder="contact.message" placeholder="Tell me about your project..." class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:border-blue-500 focus:outline-none" required></textarea>
-            <button type="submit" class="btn btn-primary w-full justify-center" data-i18n="contact.send">Send Message</button>
-            <p id="formStatus" class="text-sm text-center text-gray-700 dark:text-gray-300"></p>
-          </form>
-        </div>
-        <div class="card bg-gradient-to-br from-blue-600 to-purple-600 text-white">
-          <h3 class="text-2xl font-semibold mb-6" data-i18n="contact.info">Contact Information</h3>
-          <div class="space-y-6">
-            <div>
-              <p class="font-semibold mb-2" data-i18n="contact.emailLabel">Email</p>
-              <a href="mailto:eliasmawlawyzada@gmail.com" class="text-blue-100 hover:text-white underline">eliasmawlawyzada@gmail.com</a>
-            </div>
-            <div>
-              <p class="font-semibold mb-2" data-i18n="contact.locationLabel">Location</p>
-              <p class="text-blue-100">Neuwied, Germany</p>
-            </div>
-            <div>
-              <p class="font-semibold mb-2" data-i18n="contact.responseLabel">Response Time</p>
-              <p class="text-blue-100" data-i18n="contact.responseValue">Usually within 24 hours</p>
-            </div>
-            <div>
-              <p class="font-semibold mb-2" data-i18n="contact.availabilityLabel">Availability</p>
-              <p class="text-blue-100" data-i18n="contact.availabilityValue">Open for new projects</p>
-            </div>
-          </div>
-          <div class="mt-8 pt-8 border-t border-blue-400">
-            <p class="font-semibold mb-4" data-i18n="contact.other">Prefer other channels?</p>
-            <div class="flex gap-3">
-              <a href="https://wa.me/491234567890" class="btn bg-white/20 hover:bg-white/30 border-0 text-white">WhatsApp</a>
-              <a href="tel:+49" class="btn bg-white/20 hover:bg-white/30 border-0 text-white" data-i18n="contact.call">Call</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Footer -->
-  <footer class="py-12 bg-gray-900 dark:bg-black text-gray-300">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="grid md:grid-cols-4 gap-8 mb-8">
+
+
+    <!-- Content Section -->
+    <section class="min-h-screen bg-gradient-to-b from-gray-900 to-black py-16 px-6">
+      <div class="max-w-5xl mx-auto">
+        <!-- About Content -->
+        <div class="bg-white/5 backdrop-blur-lg rounded-3xl p-8 md:p-10 shadow-2xl border border-white/10 text-white mb-12">
+          <h2 id="aboutTitle" class="text-2xl md:text-3xl font-bold mb-5 text-center">About Me</h2>
+          <div class="space-y-4 text-sm md:text-base leading-relaxed">
+            <p id="aboutP1">
+              I am a software engineer with international experience in creating modern, user-focused digital solutions.
+              I studied Computer Science in Germany and expanded my expertise with professional Software Engineering
+              experience in the Netherlands.
+            </p>
+            <p id="aboutP2">
+              My skills include software development, web design, cloud technologies, and DevOps practices, with hands-on
+              knowledge of Java, C++, JavaScript, React, HTML, and CSS. I enjoy designing clean, scalable systems that solve
+              real problems.
+            </p>
+            <p id="aboutP3">
+              Before entering the tech field, I worked for several years as a German–English–Persian interpreter. This
+              background strengthened my communication skills and helps me understand client needs clearly, translate complex
+              requirements, and deliver precise technical solutions.
+            </p>
+            <p id="aboutP4">
+              At mzdTech, my goal is to turn ideas into reliable, high-quality digital solutions. I focus on building software
+              and web applications that are efficient, scalable, and tailored to my clients' needs.
+            </p>
+          </div>
+
+          <div class="mt-8 flex flex-wrap gap-3 justify-center">
+            <a href="https://www.linkedin.com" target="_blank" class="btn btn-outline text-white border-white hover:bg-white hover:text-black text-xs md:text-sm">LinkedIn</a>
+            <a href="https://github.com" target="_blank" class="btn btn-outline text-white border-white hover:bg-white hover:text-black text-xs md:text-sm">GitHub</a>
+          </div>
+        </div>
+
+        <!-- Skills & Tech Stack -->
+        <div class="text-center mb-16">
+          <h3 id="aboutSkillsTitle" class="text-2xl md:text-3xl font-bold mb-6 text-white">Skills & Technologies</h3>
+          <div class="flex flex-wrap gap-3 justify-center text-xs md:text-sm">
+            <span class="badge">Java</span>
+            <span class="badge">C++</span>
+            <span class="badge">Python</span>
+            <span class="badge">JavaScript</span>
+            <span class="badge">React</span>
+            <span class="badge">HTML/CSS</span>
+            <span class="badge">Node.js</span>
+            <span class="badge">PostgreSQL</span>
+            <span class="badge">MongoDB</span>
+            <span class="badge">AWS</span>
+            <span class="badge">Docker</span>
+            <span class="badge">CI/CD</span>
+          </div>
+        </div>
+
+        <!-- Experience Timeline -->
+        <div class="bg-white/5 backdrop-blur-lg rounded-3xl p-8 md:p-10 border border-white/10">
+          <h3 id="aboutJourneyTitle" class="text-2xl md:text-3xl font-bold mb-6 text-center text-white">Professional Journey</h3>
+          <div class="space-y-6 text-sm md:text-base">
+            <div class="border-l-4 border-blue-500 pl-5">
+              <h4 class="text-lg font-bold text-blue-400 mb-1">CEO & Founder</h4>
+              <p class="font-semibold text-white">mzdTech · 2024 – today</p>
+              <p class="text-gray-400 mb-1 text-xs">Germany</p>
+              <p class="text-gray-300">Leading innovative IT solutions, product development, and programming education.</p>
+            </div>
+            <div class="border-l-4 border-blue-500 pl-5">
+              <h4 class="text-lg font-bold text-blue-400 mb-1">Software Engineer</h4>
+              <p class="font-semibold text-white">Netherlands</p>
+              <p class="text-gray-400 mb-1 text-xs">Professional Experience</p>
+              <p class="text-gray-300">Developed scalable web applications and cloud solutions for international clients.</p>
+            </div>
+            <div class="border-l-4 border-blue-500 pl-5">
+              <h4 class="text-lg font-bold text-blue-400 mb-1">Interpreter</h4>
+              <p class="font-semibold text-white">German–English–Persian</p>
+              <p class="text-gray-400 mb-1 text-xs">Several Years</p>
+              <p class="text-gray-300">Bridged communication gaps and developed strong client relationship skills.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer (shown on all pages except welcome & about) -->
+  <footer id="mainFooter" class="hidden py-10 bg-black text-gray-300">
+    <div class="max-w-7xl mx-auto px-6 space-y-8">
+      <div class="grid md:grid-cols-4 gap-8">
         <div>
-          <h4 class="font-bold text-xl mb-4 text-white">mzdTech</h4>
-          <p class="text-sm" data-i18n="footer.tag">Connecting people with technology through innovative solutions.</p>
+          <h4 class="font-bold text-lg mb-3 text-white">mzdTech</h4>
+          <p class="text-xs md:text-sm" id="footerAbout">
+            Connecting people with technology through innovative solutions and education.
+          </p>
         </div>
         <div>
-          <h4 class="font-semibold mb-4 text-white" data-i18n="footer.services">Services</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="#solutions" class="hover:text-blue-400" data-i18n="footer.web">Web Development</a></li>
-            <li><a href="#solutions" class="hover:text-blue-400" data-i18n="footer.proto">Prototyping</a></li>
-            <li><a href="#solutions" class="hover:text-blue-400" data-i18n="footer.cloud">Cloud Solutions</a></li>
+          <h4 class="font-semibold mb-3 text-white text-sm">Services</h4>
+          <ul class="space-y-2 text-xs md:text-sm">
+            <li><button onclick="showSection('service')" class="hover:text-blue-400">Web Development</button></li>
+            <li><button onclick="showSection('service')" class="hover:text-blue-400">Cloud Solutions</button></li>
+            <li><button onclick="showSection('service')" class="hover:text-blue-400">Prototyping</button></li>
           </ul>
         </div>
         <div>
-          <h4 class="font-semibold mb-4 text-white" data-i18n="footer.company">Company</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="#about" class="hover:text-blue-400" data-i18n="footer.about">About</a></li>
-            <li><a href="#portfolio" class="hover:text-blue-400" data-i18n="footer.portfolio">Portfolio</a></li>
-            <li><a href="#testimonials" class="hover:text-blue-400" data-i18n="footer.testimonials">Testimonials</a></li>
+          <h4 class="font-semibold mb-3 text-white text-sm">Solutions</h4>
+          <ul class="space-y-2 text-xs md:text-sm">
+            <li><button onclick="showSection('solutions')" class="hover:text-blue-400">Our Apps</button></li>
+            <li><button onclick="showSection('solutions')" class="hover:text-blue-400">Web Platforms</button></li>
+            <li><button onclick="showSection('solutions')" class="hover:text-blue-400">Custom Solutions</button></li>
           </ul>
         </div>
         <div>
-          <h4 class="font-semibold mb-4 text-white" data-i18n="footer.connect">Connect</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="#contact" class="hover:text-blue-400" data-i18n="footer.contact">Contact</a></li>
-            <li><a href="#faq" class="hover:text-blue-400" data-i18n="footer.faq">FAQ</a></li>
-            <li><a href="mailto:eliasmawlawyzada@gmail.com" class="hover:text-blue-400">Email</a></li>
+          <h4 class="font-semibold mb-3 text-white text-sm">Education</h4>
+          <ul class="space-y-2 text-xs md:text-sm">
+            <li><button onclick="showSection('education')" class="hover:text-blue-400">Learn Programming</button></li>
+            <li><button onclick="showSection('education')" class="hover:text-blue-400">Video Tutorials</button></li>
+            <li><button onclick="showSection('education')" class="hover:text-blue-400">Mentorship</button></li>
           </ul>
         </div>
       </div>
-      <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-sm">© <span id="year"></span> mzdTech. <span data-i18n="footer.rights">All rights reserved.</span></p>
-        <p class="text-xs text-gray-500"><span data-i18n="footer.updated">Last updated:</span> <span id="lastUpdated"></span></p>
+
+      <!-- Newsletter -->
+      <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row items-center gap-4 justify-between">
+        <div class="text-xs md:text-sm">
+          <p id="newsletterTitle" class="font-semibold text-white mb-1">Weekly Tech & Coding Tips</p>
+          <p id="newsletterText" class="text-gray-400">Get one short, practical tip per week. No spam.</p>
+        </div>
+        <form id="newsletterForm" class="flex w-full md:w-auto gap-2">
+          <input type="email" id="newsletterEmail" placeholder="Your email" required class="flex-1 px-3 py-2 rounded-lg border text-xs md:text-sm bg-white text-gray-900"/>
+          <button type="submit" class="btn btn-primary text-xs md:text-sm">Subscribe</button>
+        </form>
+      </div>
+
+      <div class="text-center text-xs text-gray-500">
+        <p>© 2024 mzdTech. All rights reserved.</p>
+        <p class="mt-1 text-[11px]">Created by Elias Mawlawyzada</p>
       </div>
     </div>
   </footer>
 
-  <!-- Chat Widget -->
-  <button id="chatFab" class="chat-fab btn btn-primary shadow-2xl" aria-label="Open chat">💬 Chat</button>
-  <div id="chatBox" class="chat-box">
-    <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-t-xl">
-      <div class="font-semibold" data-i18n="chat.title">Chat Assistant</div>
-      <button id="chatClose" class="text-sm px-2 py-1 rounded hover:bg-white/20">✕</button>
+  <!-- PROJECT INQUIRY WIZARD MODAL -->
+  <div id="wizardModal" class="modal-backdrop modal-hidden">
+    <div class="card max-w-lg w-full max-h-[90vh] overflow-y-auto bg-gray-900 text-white dark:bg-gray-900">
+      <div class="flex justify-between items-center mb-3">
+        <h3 class="font-bold text-lg" id="wizardTitle">Project Inquiry</h3>
+        <button onclick="closeWizard()" class="text-gray-400 hover:text-white text-xl leading-none">&times;</button>
+      </div>
+
+      <div class="wizard-step wizard-step-active" data-step="1">
+        <p class="text-sm mb-3">Step 1 of 4 – What do you need?</p>
+        <label class="block text-sm mb-1">Project type</label>
+        <select id="wizardProjectType" class="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-sm">
+          <option value="web">Website</option>
+          <option value="webapp">Web App</option>
+          <option value="cloud">Cloud Setup</option>
+          <option value="prototype">Prototype / MVP</option>
+          <option value="education">Education / Mentoring</option>
+          <option value="other">Not sure yet</option>
+        </select>
+      </div>
+
+      <div class="wizard-step" data-step="2">
+        <p class="text-sm mb-3">Step 2 of 4 – About your business</p>
+        <label class="block text-sm mb-1">Company / project name</label>
+        <input id="wizardCompany" class="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-sm"/>
+
+        <label class="block text-sm mb-1 mt-3">Size</label>
+        <select id="wizardSize" class="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-sm">
+          <option value="solo">Just me</option>
+          <option value="small">Small team (2–10)</option>
+          <option value="medium">Medium (11–50)</option>
+          <option value="large">50+</option>
+        </select>
+      </div>
+
+      <div class="wizard-step" data-step="3">
+        <p class="text-sm mb-3">Step 3 of 4 – Budget & timeline</p>
+        <label class="block text-sm mb-1">Rough budget</label>
+        <select id="wizardBudget" class="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-sm">
+          <option value="small">&lt; €500</option>
+          <option value="medium">€500 – €1500</option>
+          <option value="bigger">&gt; €1500</option>
+          <option value="unknown">Not sure yet</option>
+        </select>
+
+        <label class="block text-sm mb-1 mt-3">Timeline</label>
+        <select id="wizardTimeline" class="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-sm">
+          <option value="fast">ASAP (0–2 weeks)</option>
+          <option value="soon">Soon (1–2 months)</option>
+          <option value="later">Flexible</option>
+        </select>
+      </div>
+
+      <div class="wizard-step" data-step="4">
+        <p class="text-sm mb-3">Step 4 of 4 – Contact details</p>
+        <label class="block text-sm mb-1">Your name</label>
+        <input id="wizardName" class="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-sm"/>
+
+        <label class="block text-sm mb-1 mt-3">Your email</label>
+        <input id="wizardEmail" type="email" class="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-sm"/>
+
+        <label class="block text-sm mb-1 mt-3">Short description</label>
+        <textarea id="wizardNotes" rows="3" class="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-sm"></textarea>
+      </div>
+
+      <div id="wizardThanks" class="wizard-step text-center" data-step="5">
+        <h4 class="font-bold text-lg mb-2">Thank you!</h4>
+        <p class="text-sm text-gray-300 mb-3">
+          Your project details are noted. I’ll reply as soon as possible with a short plan and estimate.
+        </p>
+        <button class="btn btn-primary text-sm" onclick="closeWizard()">Close</button>
+      </div>
+
+      <div class="mt-4 flex justify-between items-center text-xs">
+        <button id="wizardBack" class="btn btn-outline text-xs" onclick="wizardPrev()">Back</button>
+        <div class="flex gap-2">
+          <button id="wizardNext" class="btn btn-primary text-xs" onclick="wizardNext()">Next</button>
+        </div>
+      </div>
     </div>
-    <div id="chatLog" class="p-4 space-y-3 max-h-80 overflow-auto text-sm"></div>
-    <form id="chatForm" class="p-4 flex gap-2 border-t border-gray-200 dark:border-gray-700">
-      <input id="chatInput" class="flex-1 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" data-i18n-placeholder="chat.placeholder" placeholder="Type your message…" />
-      <button type="submit" class="btn btn-primary" data-i18n="chat.send">Send</button>
-    </form>
   </div>
 
-  <!-- WhatsApp FAB -->
-  <a class="wa-fab btn btn-primary shadow-2xl hidden md:inline-flex" target="_blank" rel="noopener" aria-label="WhatsApp chat" href="https://wa.me/491234567890?text=Hi%20Elias%2C%20I%27m%20interested%20in%20a%20project.">💬 WhatsApp</a>
+  <!-- CASE STUDY MODAL -->
+  <div id="caseStudyModal" class="modal-backdrop modal-hidden">
+    <div class="card max-w-2xl w-full max-h-[90vh] overflow-y-auto bg-gray-900 text-white dark:bg-gray-900">
+      <div class="flex justify-between items-center mb-3">
+        <h3 id="caseStudyTitle" class="font-bold text-lg">Case Study</h3>
+        <button onclick="closeCaseStudy()" class="text-gray-400 hover:text-white text-xl leading-none">&times;</button>
+      </div>
+      <p id="caseStudySubtitle" class="text-xs text-gray-400 mb-3"></p>
+      <p id="caseStudyProblem" class="text-sm mb-2"></p>
+      <p id="caseStudySolution" class="text-sm mb-2"></p>
+      <p id="caseStudyResult" class="text-sm mb-4 text-green-300"></p>
+      <ul id="caseStudyStack" class="flex flex-wrap gap-2 text-xs mb-4"></ul>
+      <button class="btn btn-primary text-xs" onclick="showSection('service')">Start Similar Project</button>
+    </div>
+  </div>
+
+  <!-- COURSE DETAILS MODAL -->
+  <div id="courseModal" class="modal-backdrop modal-hidden">
+    <div class="card max-w-lg w-full max-h-[90vh] overflow-y-auto bg-gray-900 text-white">
+      <div class="flex justify-between items-center mb-3">
+        <h3 id="courseModalTitle" class="font-bold text-lg">Course Details</h3>
+        <button onclick="closeCourseDetails()" class="text-gray-400 hover:text-white text-xl leading-none">&times;</button>
+      </div>
+      <p id="courseModalLevel" class="text-xs text-gray-400 mb-2"></p>
+      <p id="courseModalDescription" class="text-sm mb-3"></p>
+      <ul id="courseModalModules" class="list-disc list-inside text-sm mb-3"></ul>
+      <p id="courseModalPrice" class="font-semibold text-green-400 mb-4"></p>
+      <button class="btn btn-primary text-xs w-full" onclick="showSection('service')">Contact for Enrollment</button>
+    </div>
+  </div>
 
   <script>
-    // Theme Toggle
+    // ---------- THEME TOGGLE ----------
     const themeToggle = document.getElementById('themeToggle');
-    const html = document.documentElement;
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    html.classList.toggle('dark', savedTheme === 'dark');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeLabel = document.getElementById('themeLabel');
+    const htmlEl = document.documentElement;
+
+    function applyThemeUI(theme) {
+      if (theme === 'dark') {
+        htmlEl.classList.add('dark');
+        themeIcon.textContent = '☀️';
+        themeLabel.textContent = 'Light';
+      } else {
+        htmlEl.classList.remove('dark');
+        themeIcon.textContent = '🌙';
+        themeLabel.textContent = 'Dark';
+      }
+    }
+
+    let savedTheme = localStorage.getItem('theme') || 'light';
+    applyThemeUI(savedTheme);
 
     themeToggle.addEventListener('click', () => {
-      const isDark = html.classList.toggle('dark');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      savedTheme = savedTheme === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('theme', savedTheme);
+      applyThemeUI(savedTheme);
     });
 
-    // Mobile Menu
-    const menuToggle = document.getElementById('menuToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
-    menuToggle?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-    mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+    // ---------- LANGUAGE TOGGLE + TRANSLATIONS ----------
+    const langToggle = document.getElementById('langToggle');
+    let currentLang = localStorage.getItem('lang') || 'en';
 
-    // Scroll Progress
-    window.addEventListener('scroll', () => {
-      const h = document.documentElement;
-      const progress = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
-      document.getElementById('scrollProgress').style.width = progress + '%';
-    });
-
-    // Counter Animation
-    const counters = document.querySelectorAll('.counter');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const target = +entry.target.dataset.target;
-          let current = 0;
-          const increment = target / 60;
-          const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-              entry.target.textContent = target;
-              clearInterval(timer);
-            } else {
-              entry.target.textContent = Math.floor(current);
-            }
-          }, 30);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.5 });
-    counters.forEach(counter => observer.observe(counter));
-
-    // Portfolio Lightbox
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightboxImg');
-    document.querySelectorAll('.portfolio-item img').forEach(img => {
-      img.addEventListener('click', () => {
-        lightboxImg.src = img.src.replace('w=900', 'w=1600');
-        lightbox.style.display = 'flex';
-      });
-    });
-    lightbox.addEventListener('click', () => lightbox.style.display = 'none');
-
-    // Contact Form
-    document.getElementById('contactForm')?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const formStatus = document.getElementById('formStatus');
-      const data = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        projectType: document.getElementById('projectType').value,
-        message: document.getElementById('message').value
-      };
-      localStorage.setItem('contactSubmission', JSON.stringify(data));
-      formStatus.textContent = i18n.t('contact.thanks');
-      formStatus.className = 'text-sm text-center text-green-600 dark:text-green-400';
-      e.target.reset();
-    });
-
-    // =====================
-    // Simple i18n (EN/DE)
-    // =====================
-    const DICT = {
+    const translations = {
       en: {
-        'nav.solutions': 'Solutions',
-        'nav.features': 'Features',
-        'nav.process': 'Process',
-        'nav.portfolio': 'Portfolio',
-        'nav.testimonials': 'Testimonials',
-        'nav.pricing': 'Pricing',
-        'nav.faq': 'FAQ',
-        'nav.contact': 'Contact',
-        'brand.name': 'mzd',
-        'hero.title': 'Connecting people with technology',
-        'hero.subtitle': "From web design to cloud and automation, let's turn ideas into reliable software.",
-        'cta.getStarted': 'Get Started',
-        'cta.explore': 'Explore Solutions',
-        'stats.projects': 'Projects Delivered',
-        'stats.clients': 'Happy Clients',
-        'stats.years': 'Years Experience',
-        'stats.ontime': '% On‑time',
-        'solutions.title': 'Solutions That Scale',
-        'solutions.subtitle': 'Custom-built solutions designed to solve real business problems',
-        'solutions.s1.title': 'Time Tracking for Students',
-        'solutions.s1.desc': 'Plan, track, and reflect with clean dashboards and analytics.',
-        'solutions.s2.title': 'Digitalflohmarkt',
-        'solutions.s2.desc': 'Marketplace with listings, chat, and secure checkout flows.',
-        'solutions.s3.title': 'TeamworkFeedback',
-        'solutions.s3.desc': 'Pulse surveys, action items, and team analytics.',
-        'solutions.s4.title': 'AI HotelFoodMonitoring',
-        'solutions.s4.desc': 'AI insights to reduce waste and improve quality.',
-        'features.title': 'Why Choose mzdTech?',
-        'features.subtitle': 'Technical excellence meets business understanding',
-        'features.f1.title': 'Lightning Fast', 'features.f1.desc': 'Optimized code and modern infrastructure ensure top performance',
-        'features.f2.title': 'Secure by Design', 'features.f2.desc': 'Security best practices integrated from day one',
-        'features.f3.title': 'Responsive', 'features.f3.desc': 'Perfect experience across all devices and screen sizes',
-        'features.f4.title': 'Cloud Native', 'features.f4.desc': 'Scalable cloud architecture built for growth',
-        'features.f5.title': 'Modern Design', 'features.f5.desc': 'Beautiful interfaces that users love to interact with',
-        'features.f6.title': 'Clear Communication', 'features.f6.desc': 'Regular updates and transparent collaboration',
-        'process.title': 'How We Work',
-        'process.subtitle': 'A proven process for successful projects',
-        'process.p1.title': '1. Discovery', 'process.p1.desc': 'Understanding your needs, goals, and technical requirements through in-depth consultation.',
-        'process.p2.title': '2. Planning', 'process.p2.desc': 'Creating detailed proposals, timelines, and technical specifications for your approval.',
-        'process.p3.title': '3. Development', 'process.p3.desc': "Agile development with regular demos and feedback loops to ensure we're on track.",
-        'process.p4.title': '4. Testing', 'process.p4.desc': 'Comprehensive testing across devices, browsers, and real-world scenarios.',
-        'process.p5.title': '5. Launch & Support', 'process.p5.desc': 'Smooth deployment and ongoing support to ensure your success.',
-        'portfolio.title': 'Recent Work', 'portfolio.subtitle': 'Projects that made an impact',
-        'portfolio.i1.title': 'Landing Page – Startup', 'portfolio.i1.desc': 'Modern landing page with lead capture',
-        'portfolio.i2.title': 'Analytics Dashboard', 'portfolio.i2.desc': 'Real-time data visualization',
-        'portfolio.i3.title': 'Cloud Setup – SME', 'portfolio.i3.desc': 'Scalable infrastructure deployment',
-        'testimonials.title': 'Client Testimonials', 'testimonials.subtitle': 'What our clients say about working with us',
-        'testimonials.t1.text': '"mzdTech modernized our website in days. Clear communication and on‑time delivery."',
-        'testimonials.t1.role': 'Café Owner',
-        'testimonials.t2.text': '"Our prototype helped us validate the idea with clients—great UX and speed."',
-        'testimonials.t2.role': 'Startup Founder',
-        'testimonials.t3.text': '"Straightforward cloud setup with backups and monitoring. Highly recommend."',
-        'testimonials.t3.role': 'Operations Lead',
-        'cases.title': 'Success Stories', 'cases.subtitle': 'Real results for real businesses',
-        'cases.c1.title': 'Café Online Presence',
-        'cases.c1.body': '<strong>Problem:</strong> No online visibility<br><strong>Solution:</strong> 1‑page site + menu<br><strong>Result:</strong> +35% reservations in 2 months',
-        'cases.c2.title': 'Startup Lead Gen',
-        'cases.c2.body': '<strong>Problem:</strong> Low conversions<br><strong>Solution:</strong> Landing page A/B tests<br><strong>Result:</strong> +2.1× leads in first month',
-        'pricing.title': 'Transparent Pricing', 'pricing.subtitle': 'Simple, clear pricing with no hidden fees',
-        'pricing.popular': 'Most Popular',
-        'pricing.p1.title': 'Starter', 'pricing.p1.desc': 'Perfect for small businesses',
-        'pricing.p1.l1': '✓ 1-page responsive website',
-        'pricing.p1.l2': '✓ Contact form integration',
-        'pricing.p1.l3': '✓ Mobile optimized',
-        'pricing.p1.l4': '✓ ~1 week delivery',
-        'pricing.p1.cta': 'Get Started',
-        'pricing.p2.title': 'Pro', 'pricing.p2.desc': 'For growing companies',
-        'pricing.p2.l1': '✓ Web app prototype',
-        'pricing.p2.l2': '✓ 3 core screens/flows',
-        'pricing.p2.l3': '✓ Interactive & clickable',
-        'pricing.p2.l4': '✓ 2–3 weeks delivery',
-        'pricing.p2.cta': 'Start Prototype',
-        'pricing.p3.title': 'Cloud', 'pricing.p3.desc': 'Production-ready infrastructure',
-        'pricing.p3.l1': '✓ App deployment',
-        'pricing.p3.l2': '✓ Automated backups',
-        'pricing.p3.l3': '✓ Monitoring & alerts',
-        'pricing.p3.l4': '✓ ~2 weeks setup',
-        'pricing.p3.cta': 'Setup Cloud',
-        'faq.title': 'Frequently Asked Questions', 'faq.subtitle': 'Everything you need to know',
-        'faq.ask': 'Ask AI anything about pricing, timeline, or tech',
-        'faq.placeholder': 'Type your question…',
-        'faq.button': 'Ask AI',
-        'faq.q1': 'How quickly can we start?', 'faq.a1': "Usually within a week. For urgent projects, I'll try to accommodate faster timelines.",
-        'faq.q2': 'What tech stack do you use?', 'faq.a2': 'HTML/CSS/JS for sites; React or Vanilla for prototypes; AWS/Azure/GCP for cloud infrastructure.',
-        'faq.q3': 'Do you offer maintenance?', 'faq.a3': 'Yes—monthly maintenance plans include backups, updates, security patches, and monitoring.',
-        'faq.q4': 'What if I need changes after launch?', 'faq.a4': 'I offer flexible support packages for post-launch updates and enhancements.',
-        'about.title': 'About Me', 'about.p1': "I'm a final-year Computer Science student at Hochschule Osnabrück with extensive experience in software development, web design, and cloud technologies.",
-        'about.p2': 'My technical expertise spans Java, C++, JavaScript, React, HTML, and CSS, along with modern cloud platforms and DevOps practices.',
-        'about.p3': 'Before transitioning to tech, I worked as a German-English-Persian interpreter, which gave me exceptional communication skills and the ability to explain complex technical concepts clearly.',
-        'about.p4': 'I bring a solution-focused mindset to every project, always refining processes and implementations for optimal results.',
-        'about.cv': 'Download CV', 'about.contact': 'Get in Touch',
-        'contact.title': "Let's Build Something Great", 'contact.subtitle': 'Ready to start your project? Get in touch today.',
-        'contact.quick': 'Quick Contact',
-        'contact.name': 'Your Name', 'contact.email': 'Your Email', 'contact.message': 'Tell me about your project...',
-        'contact.send': 'Send Message', 'contact.info': 'Contact Information', 'contact.emailLabel': 'Email', 'contact.locationLabel': 'Location', 'contact.responseLabel': 'Response Time', 'contact.responseValue': 'Usually within 24 hours', 'contact.availabilityLabel': 'Availability', 'contact.availabilityValue': 'Open for new projects', 'contact.other': 'Prefer other channels?', 'contact.call': 'Call', 'contact.thanks': "Thanks! I'll get back to you within 24 hours.",
-        'contact.opt1': 'Landing Page', 'contact.opt2': 'Web App Prototype', 'contact.opt3': 'Cloud Setup', 'contact.opt4': 'Custom Project',
-        'footer.tag': 'Connecting people with technology through innovative solutions.', 'footer.services': 'Services', 'footer.company': 'Company', 'footer.connect': 'Connect', 'footer.web': 'Web Development', 'footer.proto': 'Prototyping', 'footer.cloud': 'Cloud Solutions', 'footer.about': 'About', 'footer.portfolio': 'Portfolio', 'footer.testimonials': 'Testimonials', 'footer.contact': 'Contact', 'footer.faq': 'FAQ', 'footer.rights': 'All rights reserved.', 'footer.updated': 'Last updated:',
-        'chat.title': 'Chat Assistant', 'chat.placeholder': 'Type your message…', 'chat.send': 'Send',
-        'skills.cloud': 'Cloud'
+        // just some key labels (you can add more)
+        homeSubtitle: 'Connecting People with Technology',
+        homeServicesTitle: 'Services',
+        homeServicesText: 'Professional IT Solutions & Consulting',
+        homeSolutionsTitle: 'Solutions',
+        homeSolutionsText: 'Innovative Apps & Web Platforms',
+        homeEducationTitle: 'Education',
+        homeEducationText: 'Learn Programming from Scratch',
+        statsExperienceLabel: 'Years of experience',
+        statsProjectsLabel: 'Projects delivered',
+        statsStudentsLabel: 'Students taught',
+        servicesHeroTitle: 'Professional IT Services',
+        servicesHeroSubtitle: 'From web design to cloud and automation.',
+        eduHeroTitle: 'Learn Programming',
+        eduHeroSubtitle: 'Master coding from scratch with guidance from an experienced engineer',
+        eduPathsTitle: 'Recommended Learning Paths',
+        faqTitle: 'Frequently Asked Questions',
+        contactTitle: 'Ready to Start Your Project?',
+        contactSubtitle: 'Tell us about your idea – you’ll get an honest, no-pressure reply.',
+        solutionsHeroTitle: 'Our Solutions',
+        solutionsHeroSubtitle: 'Products and platforms built by mzdTech.',
+        aboutTitle: 'About Me',
+        aboutSkillsTitle: 'Skills & Technologies',
+        aboutJourneyTitle: 'Professional Journey',
+        newsletterTitle: 'Weekly Tech & Coding Tips',
+        newsletterText: 'Get one short, practical tip per week. No spam.'
       },
       de: {
-        'nav.solutions': 'Lösungen',
-        'nav.features': 'Funktionen',
-        'nav.process': 'Ablauf',
-        'nav.portfolio': 'Portfolio',
-        'nav.testimonials': 'Referenzen',
-        'nav.pricing': 'Preise',
-        'nav.faq': 'FAQ',
-        'nav.contact': 'Kontakt',
-        'brand.name': 'mzd',
-        'hero.title': 'Menschen mit Technologie verbinden',
-        'hero.subtitle': 'Von Webdesign bis Cloud & Automatisierung – wir machen aus Ideen zuverlässige Software.',
-        'cta.getStarted': 'Loslegen',
-        'cta.explore': 'Lösungen ansehen',
-        'stats.projects': 'Abgeschlossene Projekte',
-        'stats.clients': 'Zufriedene Kunden',
-        'stats.years': 'Jahre Erfahrung',
-        'stats.ontime': '% Pünktlich',
-        'solutions.title': 'Skalierbare Lösungen',
-        'solutions.subtitle': 'Individuelle Lösungen, die echte Geschäftsprobleme lösen',
-        'solutions.s1.title': 'Zeiterfassung für Studierende',
-        'solutions.s1.desc': 'Planen, verfolgen und reflektieren – mit klaren Dashboards und Analytics.',
-        'solutions.s2.title': 'Digitalflohmarkt',
-        'solutions.s2.desc': 'Marktplatz mit Inseraten, Chat und sicherem Checkout.',
-        'solutions.s3.title': 'TeamworkFeedback',
-        'solutions.s3.desc': 'Pulsbefragungen, To‑dos und Teamanalysen.',
-        'solutions.s4.title': 'AI HotelFoodMonitoring',
-        'solutions.s4.desc': 'KI‑Insights zur Abfallreduzierung und Qualitätssteigerung.',
-        'features.title': 'Warum mzdTech?',
-        'features.subtitle': 'Technische Exzellenz trifft Business‑Verständnis',
-        'features.f1.title': 'Blitzschnell', 'features.f1.desc': 'Optimierter Code und moderne Infrastruktur für Top‑Performance',
-        'features.f2.title': 'Sicher by Design', 'features.f2.desc': 'Sicherheits‑Best Practices von Anfang an integriert',
-        'features.f3.title': 'Responsiv', 'features.f3.desc': 'Perfektes Erlebnis auf allen Geräten und Bildschirmgrößen',
-        'features.f4.title': 'Cloud‑Native', 'features.f4.desc': 'Skalierbare Cloud‑Architektur für Wachstum',
-        'features.f5.title': 'Modernes Design', 'features.f5.desc': 'Schöne Interfaces, die Nutzer lieben',
-        'features.f6.title': 'Klare Kommunikation', 'features.f6.desc': 'Regelmäßige Updates und transparente Zusammenarbeit',
-        'process.title': 'So arbeiten wir',
-        'process.subtitle': 'Ein erprobter Prozess für erfolgreiche Projekte',
-        'process.p1.title': '1. Discovery', 'process.p1.desc': 'Bedarfe, Ziele und Anforderungen im Detail verstehen.',
-        'process.p2.title': '2. Planung', 'process.p2.desc': 'Detaillierte Angebote, Timelines und Spezifikationen zur Freigabe.',
-        'process.p3.title': '3. Entwicklung', 'process.p3.desc': 'Agil, mit regelmäßigen Demos und Feedback‑Loops.',
-        'process.p4.title': '4. Testing', 'process.p4.desc': 'Umfassende Tests über Geräte, Browser und reale Szenarien.',
-        'process.p5.title': '5. Go‑Live & Support', 'process.p5.desc': 'Reibungsloser Rollout und laufender Support für Ihren Erfolg.',
-        'portfolio.title': 'Aktuelle Arbeiten', 'portfolio.subtitle': 'Projekte mit Wirkung',
-        'portfolio.i1.title': 'Landingpage – Startup', 'portfolio.i1.desc': 'Moderne Landingpage mit Lead‑Erfassung',
-        'portfolio.i2.title': 'Analytics‑Dashboard', 'portfolio.i2.desc': 'Echtzeit‑Datenvisualisierung',
-        'portfolio.i3.title': 'Cloud‑Setup – KMU', 'portfolio.i3.desc': 'Skalierbare Infrastruktur',
-        'testimonials.title': 'Kundenstimmen', 'testimonials.subtitle': 'So erleben Kund:innen die Zusammenarbeit',
-        'testimonials.t1.text': '"mzdTech hat unsere Website in wenigen Tagen modernisiert. Klare Kommunikation und pünktliche Lieferung."',
-        'testimonials.t1.role': 'Café‑Inhaberin',
-        'testimonials.t2.text': '"Mit dem Prototyp konnten wir die Idee validieren – top UX und Tempo."',
-        'testimonials.t2.role': 'Startup‑Gründer',
-        'testimonials.t3.text': '"Unkompliziertes Cloud‑Setup mit Backups und Monitoring. Sehr zu empfehlen."',
-        'testimonials.t3.role': 'Leitung Operations',
-        'cases.title': 'Erfolgsgeschichten', 'cases.subtitle': 'Messbare Ergebnisse für echte Unternehmen',
-        'cases.c1.title': 'Café Online‑Auftritt',
-        'cases.c1.body': '<strong>Problem:</strong> Keine Sichtbarkeit<br><strong>Lösung:</strong> 1‑Pager + Menü<br><strong>Ergebnis:</strong> +35% Reservierungen in 2 Monaten',
-        'cases.c2.title': 'Startup Lead‑Generierung',
-        'cases.c2.body': '<strong>Problem:</strong> Niedrige Conversion<br><strong>Lösung:</strong> Landingpage A/B‑Tests<br><strong>Ergebnis:</strong> 2,1× mehr Leads im ersten Monat',
-        'pricing.title': 'Transparente Preise', 'pricing.subtitle': 'Einfach, klar, ohne versteckte Kosten',
-        'pricing.popular': 'Am beliebtesten',
-        'pricing.p1.title': 'Starter', 'pricing.p1.desc': 'Ideal für kleine Unternehmen',
-        'pricing.p1.l1': '✓ 1‑seitige responsive Website',
-        'pricing.p1.l2': '✓ Kontaktformular‑Integration',
-        'pricing.p1.l3': '✓ Für Mobilgeräte optimiert',
-        'pricing.p1.l4': '✓ ~1 Woche Lieferung',
-        'pricing.p1.cta': 'Jetzt starten',
-        'pricing.p2.title': 'Pro', 'pricing.p2.desc': 'Für wachsende Firmen',
-        'pricing.p2.l1': '✓ Web‑App‑Prototyp',
-        'pricing.p2.l2': '✓ 3 Kern‑Screens/Flows',
-        'pricing.p2.l3': '✓ Interaktiv & klickbar',
-        'pricing.p2.l4': '✓ 2–3 Wochen Lieferung',
-        'pricing.p2.cta': 'Prototyp starten',
-        'pricing.p3.title': 'Cloud', 'pricing.p3.desc': 'Produktionsreife Infrastruktur',
-        'pricing.p3.l1': '✓ App‑Deployment',
-        'pricing.p3.l2': '✓ Automatische Backups',
-        'pricing.p3.l3': '✓ Monitoring & Alerts',
-        'pricing.p3.l4': '✓ ~2 Wochen Setup',
-        'pricing.p3.cta': 'Cloud einrichten',
-        'faq.title': 'Häufige Fragen', 'faq.subtitle': 'Alles Wichtige auf einen Blick',
-        'faq.ask': 'Frag die KI zu Preisen, Zeitplan oder Tech',
-        'faq.placeholder': 'Stelle deine Frage…',
-        'faq.button': 'Fragen',
-        'faq.q1': 'Wie schnell können wir starten?', 'faq.a1': 'Meist innerhalb einer Woche. Bei dringenden Projekten versuche ich es schneller einzuplanen.',
-        'faq.q2': 'Welchen Tech‑Stack nutzt du?', 'faq.a2': 'HTML/CSS/JS für Websites; React oder Vanilla für Prototypen; AWS/Azure/GCP für Cloud.',
-        'faq.q3': 'Bietest du Wartung an?', 'faq.a3': 'Ja – monatliche Wartungspläne inkl. Backups, Updates, Security‑Patches und Monitoring.',
-        'faq.q4': 'Was ist nach dem Launch, wenn ich Änderungen brauche?', 'faq.a4': 'Flexible Support‑Pakete für Updates und Erweiterungen.',
-        'about.title': 'Über mich', 'about.p1': 'Ich bin Informatik‑Student im letzten Jahr (Hochschule Osnabrück) mit viel Erfahrung in Softwareentwicklung, Webdesign und Cloud‑Technologien.',
-        'about.p2': 'Mein Tech‑Stack: Java, C++, JavaScript, React, HTML/CSS sowie moderne Cloud‑ und DevOps‑Praktiken.',
-        'about.p3': 'Vorher war ich Dolmetscher (DE‑EN‑FA) – das schärft meine Kommunikationsfähigkeit und erklärt Technik verständlich.',
-        'about.p4': 'Ich arbeite lösungsorientiert und optimiere Prozesse und Implementierungen konsequent.',
-        'about.cv': 'Lebenslauf herunterladen', 'about.contact': 'Kontakt aufnehmen',
-        'contact.title': 'Lass uns Großartiges bauen', 'contact.subtitle': 'Bereit für dein Projekt? Melde dich gerne.',
-        'contact.quick': 'Schnellkontakt',
-        'contact.name': 'Dein Name', 'contact.email': 'Deine E‑Mail', 'contact.message': 'Erzähl mir von deinem Projekt…',
-        'contact.send': 'Nachricht senden', 'contact.info': 'Kontaktinformationen', 'contact.emailLabel': 'E‑Mail', 'contact.locationLabel': 'Standort', 'contact.responseLabel': 'Reaktionszeit', 'contact.responseValue': 'In der Regel innerhalb von 24 Stunden', 'contact.availabilityLabel': 'Verfügbarkeit', 'contact.availabilityValue': 'Offen für neue Projekte', 'contact.other': 'Andere Kanäle bevorzugt?', 'contact.call': 'Anrufen', 'contact.thanks': 'Danke! Ich melde mich innerhalb von 24 Stunden.',
-        'contact.opt1': 'Landingpage', 'contact.opt2': 'Web‑App‑Prototyp', 'contact.opt3': 'Cloud‑Setup', 'contact.opt4': 'Individuelles Projekt',
-        'footer.tag': 'Menschen durch Technologie verbinden – mit innovativen Lösungen.', 'footer.services': 'Leistungen', 'footer.company': 'Unternehmen', 'footer.connect': 'Kontakt', 'footer.web': 'Web‑Entwicklung', 'footer.proto': 'Prototyping', 'footer.cloud': 'Cloud‑Lösungen', 'footer.about': 'Über mich', 'footer.portfolio': 'Portfolio', 'footer.testimonials': 'Referenzen', 'footer.contact': 'Kontakt', 'footer.faq': 'FAQ', 'footer.rights': 'Alle Rechte vorbehalten.', 'footer.updated': 'Letzte Aktualisierung:',
-        'chat.title': 'Chat‑Assistent', 'chat.placeholder': 'Nachricht eingeben…', 'chat.send': 'Senden',
-        'skills.cloud': 'Cloud'
+        homeSubtitle: 'Menschen mit Technologie verbinden',
+        homeServicesTitle: 'Dienstleistungen',
+        homeServicesText: 'Professionelle IT-Lösungen & Beratung',
+        homeSolutionsTitle: 'Lösungen',
+        homeSolutionsText: 'Innovative Apps & Webplattformen',
+        homeEducationTitle: 'Ausbildung',
+        homeEducationText: 'Programmieren von Grund auf lernen',
+        statsExperienceLabel: 'Jahre Erfahrung',
+        statsProjectsLabel: 'Umgesetzte Projekte',
+        statsStudentsLabel: 'Unterstützte Lernende',
+        servicesHeroTitle: 'Professionelle IT-Dienstleistungen',
+        servicesHeroSubtitle: 'Von Webdesign bis Cloud & Automatisierung.',
+        eduHeroTitle: 'Programmieren lernen',
+        eduHeroSubtitle: 'Lerne Programmieren mit Begleitung eines erfahrenen Entwicklers',
+        eduPathsTitle: 'Empfohlene Lernpfade',
+        faqTitle: 'Häufige Fragen',
+        contactTitle: 'Bereit für dein Projekt?',
+        contactSubtitle: 'Erzähl uns von deiner Idee – du erhältst eine ehrliche, unverbindliche Einschätzung.',
+        solutionsHeroTitle: 'Unsere Lösungen',
+        solutionsHeroSubtitle: 'Produkte und Plattformen von mzdTech.',
+        aboutTitle: 'Über mich',
+        aboutSkillsTitle: 'Fähigkeiten & Technologien',
+        aboutJourneyTitle: 'Berufliche Laufbahn',
+        newsletterTitle: 'Wöchentliche Tech- & Coding-Tipps',
+        newsletterText: 'Ein kurzer, praktischer Tipp pro Woche. Kein Spam.'
       }
     };
 
-    const i18n = {
-      current: localStorage.getItem('lang') || 'en',
-      t: (k) => (DICT[i18n.current] && DICT[i18n.current][k]) || DICT.en[k] || k,
-      apply() {
-        document.documentElement.lang = i18n.current;
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-          const key = el.getAttribute('data-i18n');
-          const val = i18n.t(key);
-          if (val && val.includes('<')) { el.innerHTML = val; } else { el.textContent = val; }
-        });
-        // placeholders
-        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-          const key = el.getAttribute('data-i18n-placeholder');
-          const val = i18n.t(key);
-          if (val) el.setAttribute('placeholder', val);
-        });
-      }
-    };
-
-    // Language toggle
-    const langToggle = document.getElementById('langToggle');
-    langToggle.addEventListener('click', () => {
-      i18n.current = (i18n.current === 'en') ? 'de' : 'en';
-      localStorage.setItem('lang', i18n.current);
-      i18n.apply();
-    });
-
-    // Initial language
-    i18n.apply();
-
-    // AI FAQ (kept from original, answers in EN for simplicity)
-    const faqAsk = document.getElementById('faqAsk');
-    const faqQuery = document.getElementById('faqQuery');
-    const faqAnswer = document.getElementById('faqAiAnswer');
-
-    function getAnswer(query) {
-      const q = (query || '').toLowerCase();
-      const kb = [
-        { q: 'price pricing cost preis kosten', a: DICT[i18n.current]['pricing.title'] + ': ' + 'Starter €299, Pro €799, Cloud €599.' },
-        { q: 'time delivery timeline zeit dauer', a: 'Starter ~1 Woche / week, Pro 2–3 Wochen, Cloud ~2 Wochen.' },
-        { q: 'tech stack technology technologie', a: DICT[i18n.current]['faq.a2'] },
-        { q: 'maintenance support wartung', a: DICT[i18n.current]['faq.a3'] },
-        { q: 'start begin when wann start', a: DICT[i18n.current]['faq.q1'] + ': ' + DICT[i18n.current]['faq.a1'] }
-      ];
-      let best = { score: 0, a: DICT[i18n.current]['faq.ask'] };
-      kb.forEach(item => {
-        const words = q.split(/\W+/).filter(Boolean);
-        const score = words.reduce((s, w) => s + (item.q.includes(w) ? 1 : 0), 0);
-        if (score > best.score) best = { score, a: item.a };
+    function applyLanguage() {
+      const t = translations[currentLang];
+      if (!t) return;
+      const ids = Object.keys(t);
+      ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = t[id];
       });
-      return best.a;
+
+      document.documentElement.setAttribute('lang', currentLang);
+      // button shows which language you can switch TO
+      langToggle.textContent = currentLang === 'en' ? 'DE' : 'EN';
     }
 
-    faqAsk?.addEventListener('click', () => {
-      if (faqQuery.value.trim()) {
-        faqAnswer.textContent = i18n.current === 'de' ? 'Denke nach…' : 'Thinking...';
-        setTimeout(() => {
-          faqAnswer.innerHTML = getAnswer(faqQuery.value);
-        }, 400);
+    applyLanguage();
+
+    langToggle.addEventListener('click', () => {
+      currentLang = currentLang === 'en' ? 'de' : 'en';
+      localStorage.setItem('lang', currentLang);
+      applyLanguage();
+    });
+
+    // ---------- PAGE NAVIGATION + BACK BUTTON ----------
+    function setActivePage(page) {
+      const pages = ['welcome','service','solutions','education','about'];
+      pages.forEach(p => {
+        const id = p === 'welcome' ? 'welcomePage' : p + 'Page';
+        const el = document.getElementById(id);
+        if (el) {
+          if (p === page) el.classList.remove('hidden');
+          else el.classList.add('hidden');
+        }
+      });
+
+      const footer = document.getElementById('mainFooter');
+      if (page === 'welcome' || page === 'about') footer.classList.add('hidden');
+      else footer.classList.remove('hidden');
+
+      window.scrollTo(0, 0);
+    }
+
+    function showWelcome() {
+      setActivePage('welcome');
+      location.hash = '#home';
+    }
+
+    function showSection(section) {
+      setActivePage(section);
+      location.hash = '#' + section;
+    }
+
+    window.addEventListener('hashchange', () => {
+      const hash = location.hash.replace('#','');
+      if (['service','solutions','education','about'].includes(hash)) {
+        setActivePage(hash);
+      } else {
+        setActivePage('welcome');
       }
     });
 
-    // Chat
-    const chatFab = document.getElementById('chatFab');
-    const chatBox = document.getElementById('chatBox');
-    const chatClose = document.getElementById('chatClose');
-    const chatForm = document.getElementById('chatForm');
-    const chatInput = document.getElementById('chatInput');
-    const chatLog = document.getElementById('chatLog');
+    // ---------- EDUCATION LANGUAGE TABS ----------
+    function setEducationLang(lang) {
+      document.querySelectorAll('.edu-section').forEach(sec => sec.classList.add('hidden'));
+      const target = document.getElementById(lang);
+      if (target) target.classList.remove('hidden');
 
-    function renderChat() {
-      const messages = JSON.parse(localStorage.getItem('chatMessages') || '[]');
-      chatLog.innerHTML = messages.map(m => `
-        <div class="flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}">
-          <div class="max-w-[80%] px-3 py-2 rounded-xl ${m.role === 'user' ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100'}">
-            ${m.text}
-          </div>
-        </div>
-      `).join('');
-      chatLog.scrollTop = chatLog.scrollHeight;
+      document.querySelectorAll('[data-lang-btn]').forEach(btn => {
+        const active = btn.dataset.langBtn === lang;
+        btn.classList.toggle('bg-blue-600', active);
+        btn.classList.toggle('text-white', active);
+        btn.classList.toggle('bg-gray-800', !active);
+        btn.classList.toggle('text-gray-300', !active);
+      });
+
+      const hero = document.getElementById('educationHeroTop');
+      if (hero) hero.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    chatFab.addEventListener('click', () => chatBox.style.display = 'block');
-    chatClose.addEventListener('click', () => chatBox.style.display = 'none');
-
-    chatForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const text = chatInput.value.trim();
-      if (!text) return;
-
-      const messages = JSON.parse(localStorage.getItem('chatMessages') || '[]');
-      messages.push({ role: 'user', text });
-
-      const reply = getAnswer(text);
-      messages.push({ role: 'bot', text: reply });
-
-      localStorage.setItem('chatMessages', JSON.stringify(messages));
-      chatInput.value = '';
-      renderChat();
+    // ---------- SMOOTH SCROLL FOR INTERNAL LINKS ----------
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e){
+        const href = this.getAttribute('href');
+        if (!href || href === '#') return;
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
     });
 
-    renderChat();
+    // ---------- CONTACT & NEWSLETTER FORMS ----------
+    document.querySelectorAll('form').forEach(form => {
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        alert('Thank you! Your message has been received.');
+        form.reset();
+      });
+    });
 
-    // Footer Date
-    document.getElementById('year').textContent = new Date().getFullYear();
-    document.getElementById('lastUpdated').textContent = new Date().toLocaleString();
+    // ---------- BACK TO TOP BUTTON ----------
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) backToTopBtn.style.display = 'flex';
+      else backToTopBtn.style.display = 'none';
+    });
+    backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // ---------- STATS COUNTERS ----------
+    const counters = document.querySelectorAll('.stat-counter');
+    let countersStarted = false;
+
+    function startCounters() {
+      if (countersStarted) return;
+      counters.forEach(counter => {
+        const target = parseInt(counter.dataset.target, 10);
+        let current = 0;
+        const increment = Math.max(1, Math.floor(target / 50));
+        const interval = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(interval);
+          }
+          counter.textContent = current;
+        }, 30);
+      });
+      countersStarted = true;
+    }
+
+    const homeObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) startCounters();
+      });
+    }, { threshold: 0.5 });
+
+    const welcomeEl = document.getElementById('welcomePage');
+    if (welcomeEl) homeObserver.observe(welcomeEl);
+
+    // ---------- SERVICE NAV HIGHLIGHT ----------
+    const serviceLinks = document.querySelectorAll('.service-nav-link');
+    const serviceSections = ['services','pricing','process','faq','contact'].map(id => document.getElementById(id)).filter(Boolean);
+
+    if (serviceSections.length) {
+      const servObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            serviceLinks.forEach(link => {
+              if (link.dataset.observeSection === id) {
+                link.classList.add('nav-link-active');
+              } else {
+                link.classList.remove('nav-link-active');
+              }
+            });
+          }
+        });
+      }, { threshold: 0.3 });
+
+      serviceSections.forEach(sec => servObserver.observe(sec));
+    }
+
+    // ---------- PROJECT WIZARD ----------
+    let wizardStep = 1;
+    const wizardModal = document.getElementById('wizardModal');
+
+    function showWizardStep(step) {
+      wizardStep = step;
+      document.querySelectorAll('#wizardModal .wizard-step').forEach(el => {
+        const s = parseInt(el.dataset.step, 10);
+        el.classList.toggle('wizard-step-active', s === step);
+      });
+      document.getElementById('wizardBack').style.display = (step === 1 || step === 5) ? 'none' : 'inline-flex';
+      document.getElementById('wizardNext').style.display = (step === 4) ? 'inline-flex' : (step === 5 ? 'none' : 'inline-flex');
+      if (step === 4) document.getElementById('wizardNext').textContent = 'Send';
+      else document.getElementById('wizardNext').textContent = 'Next';
+    }
+
+    function openWizard(presetType) {
+      wizardModal.classList.remove('modal-hidden');
+      showWizardStep(1);
+      if (presetType) {
+        document.getElementById('wizardProjectType').value = presetType;
+      }
+    }
+    function closeWizard() {
+      wizardModal.classList.add('modal-hidden');
+      showWizardStep(1);
+    }
+    function wizardNext() {
+      if (wizardStep < 4) showWizardStep(wizardStep + 1);
+      else if (wizardStep === 4) {
+        showWizardStep(5);
+      }
+    }
+    function wizardPrev() {
+      if (wizardStep > 1 && wizardStep < 5) showWizardStep(wizardStep - 1);
+    }
+
+    // close wizard when clicking outside card
+    wizardModal.addEventListener('click', e => {
+      if (e.target === wizardModal) closeWizard();
+    });
+
+    // ---------- CASE STUDY MODAL ----------
+    const caseStudyModal = document.getElementById('caseStudyModal');
+    const caseData = {
+      students: {
+        title: 'Time Tracking for Students',
+        subtitle: 'Student productivity tool',
+        problem: 'Students struggled to see where their time was going and could not plan exams effectively.',
+        solution: 'We designed a simple, mobile-friendly interface to plan study sessions, track time and reflect each week.',
+        result: 'Students reported feeling more in control and more prepared before exams.',
+        stack: ['React', 'Node.js', 'MongoDB', 'Tailwind CSS']
+      },
+      marketplace: {
+        title: 'Digitalflohmarkt',
+        subtitle: 'Local marketplace',
+        problem: 'Local sellers had no central place to list items and arrange safe payments.',
+        solution: 'We built a web app with chat, image uploads and Stripe-based secure payments.',
+        result: 'Higher trust between buyers and sellers and less coordination effort.',
+        stack: ['Vue.js', 'Firebase', 'Stripe']
+      },
+      feedback: {
+        title: 'TeamworkFeedback',
+        subtitle: 'Team analytics',
+        problem: 'Teams had no structured way to collect feedback and track mood over time.',
+        solution: 'We created recurring pulse surveys and a dashboard with key metrics.',
+        result: 'Managers spotted issues earlier and improved team satisfaction.',
+        stack: ['React', 'PostgreSQL', 'Docker']
+      },
+      hotel: {
+        title: 'AI HotelFoodMonitoring',
+        subtitle: 'Hotel kitchen analytics',
+        problem: 'Hotels wasted a lot of food because they lacked clear data on consumption.',
+        solution: 'We used image recognition and simple reports to show what is thrown away and when.',
+        result: 'Hotels reduced food waste and costs while keeping guests satisfied.',
+        stack: ['Python', 'TensorFlow', 'AWS']
+      },
+      custom: {
+        title: 'Custom Web Applications',
+        subtitle: 'Tailored solutions',
+        problem: 'Many companies have unique workflows that generic tools cannot support.',
+        solution: 'We design custom apps directly around the real workflow and integrate them with existing tools.',
+        result: 'Less manual work, fewer spreadsheets, happier teams.',
+        stack: ['React', 'Node.js', 'PostgreSQL', 'Cloud']
+      },
+      analytics: {
+        title: 'Analytics Dashboards',
+        subtitle: 'Data visualization',
+        problem: 'Teams had data but no easy way to understand it at a glance.',
+        solution: 'We build dashboards that surface the important numbers and trends.',
+        result: 'Faster decisions and more transparency.',
+        stack: ['D3.js', 'REST APIs']
+      }
+    };
+
+    function openCaseStudy(key) {
+      const data = caseData[key];
+      if (!data) return;
+      document.getElementById('caseStudyTitle').textContent = data.title;
+      document.getElementById('caseStudySubtitle').textContent = data.subtitle;
+      document.getElementById('caseStudyProblem').textContent = 'Problem: ' + data.problem;
+      document.getElementById('caseStudySolution').textContent = 'Solution: ' + data.solution;
+      document.getElementById('caseStudyResult').textContent = 'Result: ' + data.result;
+      const stackEl = document.getElementById('caseStudyStack');
+      stackEl.innerHTML = '';
+      data.stack.forEach(s => {
+        const li = document.createElement('li');
+        li.className = 'badge';
+        li.textContent = s;
+        stackEl.appendChild(li);
+      });
+      caseStudyModal.classList.remove('modal-hidden');
+    }
+
+    function closeCaseStudy() {
+      caseStudyModal.classList.add('modal-hidden');
+    }
+
+    caseStudyModal.addEventListener('click', e => {
+      if (e.target === caseStudyModal) closeCaseStudy();
+    });
+
+    // ---------- COURSE DETAILS MODAL ----------
+    const courseModal = document.getElementById('courseModal');
+    const courseData = {
+      javaBasics: {
+        title: 'Java Basics – Getting Started',
+        level: 'Beginner · No experience required',
+        desc: 'Learn the core building blocks of Java: variables, types, conditions, loops and methods.',
+        modules: ['Java setup & IDE', 'Variables and data types', 'Control flow', 'Methods & basic debugging'],
+        price: '€49 – Full course access'
+      },
+      javaOOP: {
+        title: 'Object-Oriented Programming with Java',
+        level: 'Intermediate · Java basics recommended',
+        desc: 'Understand and apply OOP concepts to build maintainable Java applications.',
+        modules: ['Classes & objects', 'Encapsulation & inheritance', 'Polymorphism', 'Simple project'],
+        price: '€59 – OOP bundle'
+      },
+      cppBasics: {
+        title: 'C++ Fundamentals',
+        level: 'Beginner · Some programming helpful but not required',
+        desc: 'From variables and pointers to basic STL usage in modern C++.',
+        modules: ['Syntax & types', 'Functions', 'Pointers & references', 'Intro to STL'],
+        price: '€49 – Full course access'
+      },
+      cppAdvanced: {
+        title: 'Advanced C++',
+        level: 'Advanced · C++ basics required',
+        desc: 'Deep dive into memory management, templates and modern patterns.',
+        modules: ['Memory management', 'Templates', 'RAII & smart pointers', 'Modern C++ features'],
+        price: '€59 – Advanced bundle'
+      },
+      pyBasics: {
+        title: 'Python for Beginners',
+        level: 'Beginner · No experience required',
+        desc: 'Friendly introduction to Python syntax, data structures and basic scripts.',
+        modules: ['Syntax & types', 'Lists & dictionaries', 'Functions & modules', 'Mini automation tasks'],
+        price: '€39 – Starter bundle'
+      },
+      pyData: {
+        title: 'Python for Data Science',
+        level: 'Intermediate · Python basics required',
+        desc: 'Use NumPy, pandas and simple ML models for practical analysis.',
+        modules: ['Data loading & cleaning', 'Exploratory analysis', 'Basic ML models', 'Mini project'],
+        price: '€69 – Data science bundle'
+      },
+      jsBasics: {
+        title: 'JavaScript Basics',
+        level: 'Beginner · HTML/CSS helpful',
+        desc: 'Learn to add interactivity to websites with vanilla JavaScript.',
+        modules: ['Syntax & DOM', 'Events', 'Simple apps', 'Debugging in DevTools'],
+        price: '€39 – Starter bundle'
+      },
+      jsModern: {
+        title: 'Modern JavaScript ES6+',
+        level: 'Intermediate · JS basics required',
+        desc: 'Write cleaner and more powerful JS using modern language features.',
+        modules: ['Arrow functions', 'Promises & async/await', 'Modules', 'Practical examples'],
+        price: '€59 – Modern JS course'
+      },
+      webBasics: {
+        title: 'HTML & CSS Full Course',
+        level: 'Beginner · No experience required',
+        desc: 'Build static but modern-looking web pages with HTML and CSS.',
+        modules: ['HTML structure', 'CSS basics', 'Layouts', 'Small portfolio website'],
+        price: '€39 – Starter bundle'
+      },
+      webResponsive: {
+        title: 'Responsive Web Design',
+        level: 'Intermediate · HTML/CSS basics required',
+        desc: 'Create layouts that look great on mobile, tablet and desktop.',
+        modules: ['Flexbox', 'CSS Grid', 'Media queries', 'Responsive project'],
+        price: '€49 – Responsive design course'
+      }
+    };
+
+    function openCourseDetails(key) {
+      const data = courseData[key];
+      if (!data) return;
+      document.getElementById('courseModalTitle').textContent = data.title;
+      document.getElementById('courseModalLevel').textContent = data.level;
+      document.getElementById('courseModalDescription').textContent = data.desc;
+      document.getElementById('courseModalPrice').textContent = data.price;
+      const ul = document.getElementById('courseModalModules');
+      ul.innerHTML = '';
+      data.modules.forEach(m => {
+        const li = document.createElement('li');
+        li.textContent = m;
+        ul.appendChild(li);
+      });
+      courseModal.classList.remove('modal-hidden');
+    }
+    function closeCourseDetails() {
+      courseModal.classList.add('modal-hidden');
+    }
+    courseModal.addEventListener('click', e => {
+      if (e.target === courseModal) closeCourseDetails();
+    });
+
+    // ---------- INITIALIZE ----------
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = location.hash.replace('#','');
+      if (['service','solutions','education','about'].includes(hash)) {
+        setActivePage(hash);
+      } else {
+        setActivePage('welcome');
+        location.hash = '#home';
+      }
+      setEducationLang('java');
+    });
   </script>
 </body>
 </html>
-
-
-
